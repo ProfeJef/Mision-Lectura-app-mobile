@@ -1,0 +1,10 @@
+{
+  "name": "Misión Lectura: El Archivo de los Mundos Perdidos",
+  "short_name": "Misión Lectura",
+  "description": "Aplicación gamificada de comprensión lectora (5.° Grado) - I. E. San José de Marinilla",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070914",
+  "theme_color": "#070914"
+}

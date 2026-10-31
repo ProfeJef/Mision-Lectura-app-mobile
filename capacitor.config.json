@@ -1,0 +1,12 @@
+{
+  "appId": "com.sanjosemarinilla.misionlectura",
+  "appName": "Misión Lectura",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#070914"
+  }
+}

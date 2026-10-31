@@ -1,0 +1,23 @@
+{
+  "name": "mision-lectura-app",
+  "version": "1.0.0",
+  "description": "Misión Lectura: El Archivo de los Mundos Perdidos - Servidor Express y Empaquetado Android con Capacitor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "cap:init": "npx cap init \"Mision Lectura\" com.sanjosemarinilla.misionlectura --web-dir public",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "compression": "^1.7.4",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}
