@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#130E2B" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Misión Lectura: El Archivo de los Mundos Perdidos</title>
+  <title>Misión Lectura: El Archivo de los Mundos Perdidos | Eduquémonos con Tics</title>
   
   <!-- Preconexión para acelerar carga de fuentes y CDNs en WebView y navegador -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,6 @@
     .animate-float {
       animation: floatSlow 3.5s ease-in-out infinite;
     }
-    /* Patrón sutil de brújula mística en las tarjetas */
     .bg-magic-card {
       background: linear-gradient(180deg, #281F54 0%, #201844 55%, #171133 100%);
     }
@@ -69,6 +68,7 @@
 
     // =========================================================================
     // DATOS PEDAGÓGICOS Y MUNDOS (Alineados al Diseño Instruccional - 5.° Grado)
+    // Idea y Diseño: Equipo "Eduquémonos con Tics"
     // Institución Educativa San José de Marinilla, Antioquia
     // =========================================================================
     const INITIAL_WORLDS = [
@@ -77,7 +77,9 @@
         title: 'Cámara de las pistas',
         category: 'Comprensión literal',
         textType: 'Texto Narrativo',
-        status: 'available', // Se inicia desde 0 con el Mundo 1 Disponible
+        learningOutcome: 'RA1: Localiza información explícita (objetos, materiales y condiciones) dentro de textos narrativos comprobándola mediante citas textuales.',
+        strategyTip: 'Lee buscando datos exactos (números, nombres, objetos) que están escritos directamente en el texto.',
+        status: 'available',
         sceneEmoji: '🏛️✨',
         thumbnail: './assets/world-1.png',
         bgGradient: 'from-amber-900 via-amber-700 to-yellow-600',
@@ -92,7 +94,12 @@
           'En la galería más antigua del Archivo de los Mundos Perdidos, el búho guardián Aurelio custodiaba el Reloj de Arena Solar. Cada viernes a las cinco de la tarde, cuando el sol teñía de oro las montañas de Marinilla, Aurelio giraba el reloj exactamente tres veces hacia la izquierda usando su pluma plateada.',
           'Dentro del pedestal de piedra reposaba un cofre de madera de cedro cerrado con dos candados de bronce. Una inscripción tallada en la base advertía a los aprendices: "Quien desee abrir el cofre para restaurar el primer fragmento deberá pronunciar el nombre del árbol sagrado y entregar cuatro semillas de roble dorado al guardián del umbral".'
         ],
-        clueHighlight: 'Fíjate en los datos exactos del primer y segundo párrafo: el instrumento que usa Aurelio, el material del cofre y la cantidad exacta de semillas.',
+        glossary: [
+          { term: 'Custodiaba', def: 'Vigilaba y protegía con mucho cuidado.' },
+          { term: 'Pedestal', def: 'Base sólida de piedra que sostiene una estatua o reliquia.' },
+          { term: 'Umbral', def: 'Entrada o puerta principal de un recinto sagrado.' }
+        ],
+        clueHighlight: 'Fíjate en los datos exactos del primer y segundo párrafo: el instrumento que usa Aurelio ("pluma plateada"), el material del cofre ("madera de cedro") y la cantidad de semillas ("cuatro semillas de roble dorado").',
         missions: [
           {
             id: 'm1_1',
@@ -111,6 +118,7 @@
               '"...cerrado con dos candados de bronce."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Busca al final del primer párrafo la palabra "usando". Ahí encontrarás el instrumento exacto y la cita que lo respalda.',
             feedbackSuccess: '¡Excelente localización literal! Identificaste el dato explícito y lo respaldaste con la cita textual exacta.'
           },
           {
@@ -130,6 +138,7 @@
               '"...pronunciar el nombre del árbol sagrado..."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Observa la primera oración del segundo párrafo: allí se describe el cofre que está dentro del pedestal.',
             feedbackSuccess: '¡Muy bien, Guardián! Has distinguido con exactitud los materiales descritos en la lectura.'
           },
           {
@@ -149,6 +158,7 @@
               '"...deberá pronunciar el nombre del árbol sagrado y entregar cuatro semillas de roble dorado al guardián del umbral."'
             ],
             correctEvidence: 2,
+            scaffoldHint: 'Lee las palabras que están entre comillas ("...") al final del segundo párrafo.',
             feedbackSuccess: '¡Cámara de las Pistas superada! Has recuperado la primera historia y desbloqueado el Bosque de las Inferencias.'
           }
         ]
@@ -158,6 +168,8 @@
         title: 'Bosque de las inferencias',
         category: 'Comprensión inferencial',
         textType: 'Texto Narrativo - Descriptivo',
+        learningOutcome: 'RA2: Deduce información implícita (condiciones climáticas, tiempo transcurrido y motivaciones) relacionando indicios del texto.',
+        strategyTip: 'Une las pistas del texto con lo que ya sabes del mundo para descubrir lo que el autor sugiere sin decirlo directamente.',
         status: 'locked',
         sceneEmoji: '🌳🔮',
         thumbnail: './assets/world-2.png',
@@ -173,7 +185,12 @@
           'Cuando Valeria y Tomás cruzaron el puente hacia el Bosque de los Susurros, el cielo se cubrió de nubes color ceniza. Tomás guardó su mapa de papel dentro de su chaqueta impermeable, subió el cierre hasta el cuello y observó cómo su aliento se convertía en pequeñas nubes blancas al hablar.',
           'A pocos metros, encontraron una fogata cuyas brasas aún brillaban con un suave color naranja y, junto a un tronco caído, vieron una taza metálica que todavía desprendía vapor de chocolate caliente. Sin embargo, alrededor del campamento no se escuchaba ninguna voz y las huellas sobre el barro fresco se dirigían apresuradamente hacia la cueva del norte.'
         ],
-        clueHighlight: 'Observa las pistas físicas: el aliento blanco, la chaqueta hasta el cuello, el vapor de la taza y las brasas aún encendidas.',
+        glossary: [
+          { term: 'Impermeable', def: 'Prenda que no deja pasar el agua ni la lluvia.' },
+          { term: 'Brasas', def: 'Trozos de leña ardiente que conservan el calor del fuego.' },
+          { term: 'Apresuradamente', def: 'Con mucha prisa o rapidez.' }
+        ],
+        clueHighlight: 'Observa las pistas físicas: el aliento blanco y el cierre hasta el cuello indican frío; el vapor del chocolate y las brasas encendidas indican que alguien estuvo allí hace muy pocos minutos.',
         missions: [
           {
             id: 'm2_1',
@@ -192,6 +209,7 @@
               '"...las huellas sobre el barro fresco se dirigían hacia la cueva del norte."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Piensa: ¿en qué tipo de clima nuestro aliento sale como humo blanco y nos subimos la chaqueta hasta el cuello?',
             feedbackSuccess: '¡Inferencia impecable! Relacionaste las nubes ceniza, el abrigo y el vapor del aliento para deducir el frío.'
           },
           {
@@ -211,6 +229,7 @@
               '"Cuando Valeria y Tomás cruzaron el puente hacia el Bosque..."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Si una taza de chocolate aún echa vapor en medio del frío, ¿hace cuánto tiempo la sirvieron?',
             feedbackSuccess: '¡Gran trabajo deductivo! Si las brasas brillan y la bebida aún humea, significa que se fueron hace instantes.'
           },
           {
@@ -230,6 +249,7 @@
               '"...alrededor del campamento no se escuchaba ninguna voz..."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Relaciona las "nubes color ceniza" (lluvia inminente) con el material del mapa ("papel") y la chaqueta ("impermeable").',
             feedbackSuccess: '¡Bosque de las Inferencias completado! Ahora tienes acceso a la Ciudad de las Voces.'
           }
         ]
@@ -239,6 +259,8 @@
         title: 'Ciudad de las voces',
         category: 'Intención y significado',
         textType: 'Texto Instructivo y Normativo',
+        learningOutcome: 'RA3: Reconoce el propósito comunicativo de textos instructivos e interpreta expresiones en lenguaje figurado según su contexto.',
+        strategyTip: 'Pregúntate: ¿Para qué escribió el autor este texto? ¿Qué quiere lograr en el lector?',
         status: 'locked',
         sceneEmoji: '🏰🌙',
         thumbnail: './assets/world-3.png',
@@ -254,7 +276,12 @@
           'AVISO OFICIAL DEL ARCHIVO CENTRAL: Todo guardián que ingrese al Taller de Restauración debe seguir estrictamente estos pasos antes de tocar un libro milenario: 1) Lavar y secar completamente sus manos; 2) Colocarse los guantes de algodón blanco; 3) Usar la brocha de cerdas suaves para retirar el polvo superficial desde el centro hacia los bordes, nunca en sentido contrario.',
           'Recuerda que las páginas antiguas son "alas de mariposa": cualquier presión brusca o rastro de humedad puede quebrar sus fibras para siempre y borrar la memoria de un pueblo entero.'
         ],
-        clueHighlight: 'Presta atención a la finalidad de las reglas enumeradas y a la metáfora "alas de mariposa" en el segundo párrafo.',
+        glossary: [
+          { term: 'Milenario', def: 'Que tiene mil años o muchísima antigüedad.' },
+          { term: 'Superficial', def: 'Que está solamente en la capa de encima.' },
+          { term: 'Fibras', def: 'Hilos finísimos que forman el papel antiguo.' }
+        ],
+        clueHighlight: 'Presta atención a la finalidad de las reglas enumeradas (1, 2, 3) y a la metáfora "alas de mariposa" explicada en el segundo párrafo.',
         missions: [
           {
             id: 'm3_1',
@@ -273,6 +300,7 @@
               '"...desde el centro hacia los bordes..."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Fíjate en cómo el texto ordena acciones numeradas (1, 2, 3) que el lector debe cumplir.',
             feedbackSuccess: '¡Correcto! Reconociste la estructura y propósito de un texto instructivo.'
           },
           {
@@ -292,6 +320,7 @@
               '"AVISO OFICIAL DEL ARCHIVO CENTRAL..."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Lee lo que está inmediatamente después de los dos puntos (:) tras "alas de mariposa".',
             feedbackSuccess: '¡Muy bien interpretado! Comprendiste el sentido figurado apoyándote en el contexto de la frase.'
           },
           {
@@ -311,6 +340,7 @@
               '"...borrar la memoria de un pueblo entero."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Revisa el paso número 3) en el primer párrafo del manual.',
             feedbackSuccess: '¡Ciudad de las Voces liberada! El Tribunal de los Lectores ha abierto sus puertas.'
           }
         ]
@@ -320,6 +350,8 @@
         title: 'Tribunal de los lectores',
         category: 'Comprensión crítica',
         textType: 'Texto Argumentativo - Crónico',
+        learningOutcome: 'RA4: Evalúa la solidez de diferentes posturas y argumentos en un texto, distinguiendo opiniones sin sustento de argumentos con pruebas.',
+        strategyTip: 'Compara quién ofrece hechos y pruebas verificables frente a quién solo expresa una opinión exagerada.',
         status: 'locked',
         sceneEmoji: '⚖️🕯️',
         thumbnail: './assets/world-4.png',
@@ -335,7 +367,12 @@
           'En el consejo del Valle de San José se discute el futuro de la Biblioteca Escolar. El consejero Darío propone cerrarla definitivamente y vender los libros impresos, asegurando que "hoy ningún estudiante necesita leer textos largos porque en las redes sociales hay videos de quince segundos sobre cualquier tema".',
           'Por el contrario, la maestra Elena sostiene que la biblioteca debe fortalecerse con talleres y tabletas digitales de consulta, pues "los videos cortos informan rápido, pero la lectura profunda de libros e historias entrena la mente para investigar, dudar de las noticias falsas y argumentar con pruebas reales". Un estudio realizado en la escuela demostró que los estudiantes que asisten al club de lectura resolvieron un 75% más de retos de ciencias y convivencia.'
         ],
-        clueHighlight: 'Compara qué pruebas ofrece Darío (una opinión general) frente a los datos y razones pedagógicas que presenta la maestra Elena.',
+        glossary: [
+          { term: 'Postura', def: 'Posición o punto de vista que alguien defiende frente a un tema.' },
+          { term: 'Noticias falsas', def: 'Información engañosa que circula sin pruebas reales.' },
+          { term: 'Argumentar', def: 'Dar razones y pruebas claras para defender una idea.' }
+        ],
+        clueHighlight: 'Compara qué pruebas ofrece Darío (una opinión general sin datos) frente a los datos verificables (75% más de retos resueltos) y razones pedagógicas de la maestra Elena.',
         missions: [
           {
             id: 'm4_1',
@@ -354,6 +391,7 @@
               '"En el consejo del Valle de San José se discute el futuro de la Biblioteca..."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Busca al final del segundo párrafo el dato estadístico del estudio realizado en la escuela.',
             feedbackSuccess: '¡Excelente juicio crítico! Distinguiste entre una afirmación sin pruebas y un argumento respaldado por evidencias.'
           },
           {
@@ -373,6 +411,7 @@
               '"...fortalecerse con talleres y tabletas digitales de consulta..."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Observa las palabras exactas de Darío en el primer párrafo cuando usa la palabra "ningún".',
             feedbackSuccess: '¡Muy bien! Identificaste una generalización apresurada dentro del debate.'
           },
           {
@@ -392,6 +431,7 @@
               '"...videos de quince segundos sobre cualquier tema."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Revisa en el segundo párrafo qué beneficios menciona Elena sobre la lectura profunda.',
             feedbackSuccess: '¡Tribunal de los Lectores superado! Has desbloqueado la misión final integradora: ¡La Bóveda del Archivo!'
           }
         ]
@@ -401,6 +441,8 @@
         title: 'La bóveda del archivo',
         category: 'Misión final',
         textType: 'Misión Integradora (Literal, Inferencial y Crítica)',
+        learningOutcome: 'RA Integrador: Integra estrategias de comprensión literal, inferencial y crítica para resolver problemas complejos justificando cada decisión con evidencia textual.',
+        strategyTip: 'Aplica los tres poderes adquiridos: localiza el dato exacto, conecta las pistas y valora el mensaje profundo del texto.',
         status: 'locked',
         isFinalVault: true,
         sceneEmoji: '🌟🚪',
@@ -417,7 +459,12 @@
           'Frente a la gran puerta dorada de la Bóveda, el búho Aurelio extendió el último pergamino integrador: "Hace cien años, los fundadores ocultaron aquí el Códice de la Memoria para protegerlo del Olvido Gris. El mecanismo de apertura consta de tres engranajes: el engranaje de Cobre se activa al mediodía; el de Plata responde únicamente cuando dos guardianes leen en voz alta al mismo tiempo; y el de Oro solo gira cuando se coloca sobre el altar una semilla de ceiba recolectada en la ribera del río Negro".',
           'Cuando el aprendiz Mateo intentó abrir la bóveda él solo a las doce del día llevando la semilla de ceiba en su bolsillo, el engranaje de Cobre brilló y el de Oro comenzó a girar, pero la puerta permaneció inmóvil y el engranaje de Plata siguió apagado. En un mural cercano se leía: "Un verdadero Guardián no busca el conocimiento para encerrarlo en soledad, sino para compartirlo con su comunidad".'
         ],
-        clueHighlight: 'Esta misión final evalúa las 3 competencias del proyecto: 1) Literal (qué pide cada engranaje), 2) Inferencial (por qué falló Mateo) y 3) Crítica (el valor comunitario de la lectura).',
+        glossary: [
+          { term: 'Códice', def: 'Libro antiguo manuscrito de gran valor histórico y cultural.' },
+          { term: 'Engranajes', def: 'Piezas dentadas que se conectan entre sí para hacer funcionar un mecanismo.' },
+          { term: 'Ribera', def: 'Orilla de un río o laguna.' }
+        ],
+        clueHighlight: 'Esta misión final evalúa las 3 competencias: 1) Literal (qué pide cada engranaje), 2) Inferencial (por qué falló Mateo al ir solo) y 3) Crítica (el valor comunitario de la lectura).',
         missions: [
           {
             id: 'm5_1',
@@ -436,6 +483,7 @@
               '"...el engranaje de Plata siguió apagado."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Localiza al final del primer párrafo la condición literal del "engranaje de Oro".',
             feedbackSuccess: '¡Paso 1 completado! Has localizado con precisión la condición literal del engranaje de Oro.'
           },
           {
@@ -455,6 +503,7 @@
               '"...el engranaje de Cobre brilló y el de Oro comenzó a girar..."'
             ],
             correctEvidence: 0,
+            scaffoldHint: 'Une la condición del engranaje de Plata ("dos guardianes") con lo que hizo Mateo ("intentó abrir la bóveda él solo").',
             feedbackSuccess: '¡Inferencia maestra! Conectaste la regla del engranaje de Plata con el hecho de que Mateo acudió solo.'
           },
           {
@@ -474,6 +523,7 @@
               '"...recolectada en la ribera del río Negro."'
             ],
             correctEvidence: 1,
+            scaffoldHint: 'Lee la frase inscrita en el mural al final del segundo párrafo.',
             feedbackSuccess: '¡FELICITACIONES, MAESTRO DEL ARCHIVO! Has completado las 15 misiones de los 5 mundos utilizando evidencias textuales.'
           }
         ]
@@ -481,8 +531,26 @@
     ];
 
     // =========================================================================
-    // ICONOS SVG PERSONALIZADOS FIELES A LOS DISEÑOS PROFESIONALES
+    // COMPONENTES VISUALES Y DE CRÉDITO ("Eduquémonos con Tics")
     // =========================================================================
+    const TeamCreditBadge = ({ onOpenPedagogicalSheet }) => (
+      <div className="flex items-center justify-between bg-[#161134]/95 border border-[#56478E] rounded-full px-3 py-1 my-1.5 shadow-sm">
+        <div className="flex items-center gap-1.5 text-[11px]">
+          <span className="text-[#F8C146]">✨</span>
+          <span className="text-gray-300">Idea y Diseño:</span>
+          <strong className="text-[#2CE5D8] font-extrabold tracking-wide">Eduquémonos con Tics</strong>
+        </div>
+        {onOpenPedagogicalSheet && (
+          <button
+            onClick={onOpenPedagogicalSheet}
+            className="bg-[#281F54] hover:bg-[#372B70] text-[#F8C146] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#F8C146]/40 transition-all"
+          >
+            📋 Guía Docente
+          </button>
+        )}
+      </div>
+    );
+
     const MagicBookIcon = () => (
       <svg viewBox="0 0 48 48" className="w-11 h-11 drop-shadow-[0_2px_6px_rgba(248,184,48,0.45)] shrink-0">
         <g transform="rotate(-10 24 24)">
@@ -518,9 +586,9 @@
     };
 
     const CustomInput = ({ label, iconType, type = "text", placeholder, value, onChange }) => (
-      <div className="mb-3.5 text-left">
-        <label className="block text-white text-[13px] font-extrabold mb-1.5 ml-1 tracking-wide">{label}</label>
-        <div className="flex items-center bg-[#F4EFEA] rounded-full px-4 py-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.12)] border-2 border-transparent focus-within:border-[#F8B830] transition-all">
+      <div className="mb-3 text-left">
+        <label className="block text-white text-[13px] font-extrabold mb-1 ml-1 tracking-wide">{label}</label>
+        <div className="flex items-center bg-[#F4EFEA] rounded-full px-4 py-2.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.12)] border-2 border-transparent focus-within:border-[#F8B830] transition-all">
           <InputIcon type={iconType} />
           <input
             type={type}
@@ -537,7 +605,7 @@
       <button
         onClick={onClick}
         disabled={disabled}
-        className={`w-full bg-gradient-to-r from-[#F6B12D] via-[#FCC948] to-[#F3A420] text-[#1D1636] font-black text-[17px] py-3 px-4 rounded-full shadow-[0_6px_18px_rgba(248,184,48,0.38)] active:scale-[0.98] transition-all flex items-center justify-between mt-3 ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:brightness-105'}`}
+        className={`w-full bg-gradient-to-r from-[#F6B12D] via-[#FCC948] to-[#F3A420] text-[#1D1636] font-black text-[16px] py-3 px-4 rounded-full shadow-[0_6px_18px_rgba(248,184,48,0.38)] active:scale-[0.98] transition-all flex items-center justify-between mt-2.5 ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:brightness-105'}`}
       >
         <span className="w-8"></span>
         <span className="tracking-tight">{text}</span>
@@ -549,7 +617,7 @@
       </button>
     );
 
-    const StatCard = ({ imgSrc, fallbackIcon, label, value }) => (
+    const StatCard = ({ imgSrc, label, value }) => (
       <div className="bg-[#211A49]/95 border border-[#493B7E] rounded-2xl p-2.5 text-center flex flex-col items-center justify-between shadow-lg">
         <div className="h-11 flex items-center justify-center mb-1">
           <img
@@ -634,12 +702,12 @@
     };
 
     // =========================================================================
-    // APLICACIÓN FUNCIONAL PRINCIPAL (DESDE 0 CON PERSISTENCIA REAL)
+    // APLICACIÓN FUNCIONAL PRINCIPAL (DESDE 0 CON PERSISTENCIA Y AUTORREGULACIÓN)
     // =========================================================================
     const STORAGE_KEY = 'mision_lectura_save_v1';
 
     const App = () => {
-      const [screen, setScreen] = useState('register'); // 'register' | 'login' | 'dashboard' | 'map' | 'missions' | 'backpack' | 'profile'
+      const [screen, setScreen] = useState('register');
       const [regForm, setRegForm] = useState({ name: '', grade: '5.°', code: '' });
       const [loginForm, setLoginForm] = useState({ name: '', code: '' });
       const [authAlert, setAuthAlert] = useState(null);
@@ -649,15 +717,29 @@
       const [completedMissions, setCompletedMissions] = useState([]);
       const [artifacts, setArtifacts] = useState([]);
 
+      // Métricas de monitoreo y autorregulación (Criterio 4)
+      const [stats, setStats] = useState({ totalAttempts: 0, correctFirstTry: 0 });
+      const [reflections, setReflections] = useState({}); // { worldId: { confidence: 'Alto', strategy: '...' } }
+      const [selectedReflection, setSelectedReflection] = useState('Buscar y subrayar palabras clave en el pergamino');
+
+      // Modales autoexplicativos y pedagógicos (Criterios 1, 2 y 5)
+      const [showOnboarding, setShowOnboarding] = useState(false);
+      const [showPedagogicalModal, setShowPedagogicalModal] = useState(false);
+
+      // Estado del motor interactivo de lectura y misiones
       const [activeWorld, setActiveWorld] = useState(null);
-      const [missionPhase, setMissionPhase] = useState('exploration'); // 'exploration' | 'reading' | 'challenge' | 'worldComplete'
+      const [missionPhase, setMissionPhase] = useState('exploration');
       const [currentMissionIdx, setCurrentMissionIdx] = useState(0);
       const [selectedOption, setSelectedOption] = useState(null);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
       const [showClue, setShowClue] = useState(false);
+      const [showGlossary, setShowGlossary] = useState(false);
+      const [fontSizeLevel, setFontSizeLevel] = useState(1); // 0: normal, 1: grande, 2: extra grande
+      const [isSpeaking, setIsSpeaking] = useState(false);
       const [challengeFeedback, setChallengeFeedback] = useState(null);
+      const [currentMissionTried, setCurrentMissionTried] = useState(false);
 
-      // Cargar datos guardados en localStorage si existen (Asegurando que las rutas de miniaturas estén presentes)
+      // Cargar datos guardados en localStorage
       useEffect(() => {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
@@ -672,6 +754,8 @@
               setWorlds(mergedWorlds);
               setCompletedMissions(parsed.completedMissions || []);
               setArtifacts(parsed.artifacts || []);
+              setStats(parsed.stats || { totalAttempts: 0, correctFirstTry: 0 });
+              setReflections(parsed.reflections || {});
               setScreen('dashboard');
             }
           }
@@ -680,10 +764,51 @@
         }
       }, []);
 
+      // Detener síntesis de voz al cambiar de pantalla o cerrar mundo
+      const stopSpeech = () => {
+        try {
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+          }
+        } catch (e) {}
+        setIsSpeaking(false);
+      };
+
+      // Lectura en voz alta (Web Speech API - Competencia digital e inclusión)
+      const toggleSpeech = (world) => {
+        if (!('speechSynthesis' in window)) return;
+        if (isSpeaking) {
+          stopSpeech();
+          return;
+        }
+        try {
+          window.speechSynthesis.cancel();
+          const fullText = `${world.readingTitle}. ${world.readingPassage.join(' ')}`;
+          const utterance = new SpeechSynthesisUtterance(fullText);
+          utterance.lang = 'es-CO';
+          utterance.rate = 0.95;
+          utterance.onend = () => setIsSpeaking(false);
+          utterance.onerror = () => setIsSpeaking(false);
+          setIsSpeaking(true);
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          setIsSpeaking(false);
+        }
+      };
+
       // Manejo del botón físico "Atrás" en Android
       useEffect(() => {
         const handlePopState = (e) => {
-          if (activeWorld) {
+          stopSpeech();
+          if (showPedagogicalModal) {
+            e.preventDefault();
+            setShowPedagogicalModal(false);
+            window.history.pushState(null, '', window.location.pathname);
+          } else if (showOnboarding) {
+            e.preventDefault();
+            setShowOnboarding(false);
+            window.history.pushState(null, '', window.location.pathname);
+          } else if (activeWorld) {
             e.preventDefault();
             setActiveWorld(null);
             window.history.pushState(null, '', window.location.pathname);
@@ -696,9 +821,9 @@
         window.history.pushState(null, '', window.location.pathname);
         window.addEventListener('popstate', handlePopState);
         return () => window.removeEventListener('popstate', handlePopState);
-      }, [activeWorld, screen, user]);
+      }, [activeWorld, screen, user, showOnboarding, showPedagogicalModal]);
 
-      const saveProgress = (nextUser, nextWorlds, nextCompletedMissions, nextArtifacts) => {
+      const saveProgress = (nextUser, nextWorlds, nextCompletedMissions, nextArtifacts, nextStats = stats, nextReflections = reflections) => {
         try {
           localStorage.setItem(
             STORAGE_KEY,
@@ -706,7 +831,9 @@
               user: nextUser,
               worlds: nextWorlds,
               completedMissions: nextCompletedMissions,
-              artifacts: nextArtifacts
+              artifacts: nextArtifacts,
+              stats: nextStats,
+              reflections: nextReflections
             })
           );
         } catch (e) {
@@ -745,12 +872,16 @@
         };
 
         const freshWorlds = INITIAL_WORLDS;
+        const freshStats = { totalAttempts: 0, correctFirstTry: 0 };
         setUser(newUser);
         setWorlds(freshWorlds);
         setCompletedMissions([]);
         setArtifacts([]);
-        saveProgress(newUser, freshWorlds, [], []);
+        setStats(freshStats);
+        setReflections({});
+        saveProgress(newUser, freshWorlds, [], [], freshStats, {});
         setScreen('dashboard');
+        setShowOnboarding(true); // Guía autoexplicativa al iniciar por primera vez
       };
 
       const handleLogin = () => {
@@ -779,6 +910,8 @@
           setWorlds(mergedWorlds);
           setCompletedMissions(parsed.completedMissions || []);
           setArtifacts(parsed.artifacts || []);
+          setStats(parsed.stats || { totalAttempts: 0, correctFirstTry: 0 });
+          setReflections(parsed.reflections || {});
           setScreen('dashboard');
         } else {
           setAuthAlert({
@@ -804,11 +937,14 @@
       };
 
       const handleResetFromZero = () => {
+        stopSpeech();
         localStorage.removeItem(STORAGE_KEY);
         setUser(null);
         setWorlds(INITIAL_WORLDS);
         setCompletedMissions([]);
         setArtifacts([]);
+        setStats({ totalAttempts: 0, correctFirstTry: 0 });
+        setReflections({});
         setRegForm({ name: '', grade: '5.°', code: '' });
         setLoginForm({ name: '', code: '' });
         setAuthAlert(null);
@@ -817,6 +953,7 @@
 
       const openWorldMission = (world) => {
         if (world.status === 'locked') return;
+        stopSpeech();
         const firstPendingIdx = world.missions.findIndex((m) => !completedMissions.includes(m.id));
         setCurrentMissionIdx(firstPendingIdx >= 0 ? firstPendingIdx : 0);
         setActiveWorld(world);
@@ -824,7 +961,9 @@
         setSelectedOption(null);
         setSelectedEvidence(null);
         setShowClue(false);
+        setShowGlossary(false);
         setChallengeFeedback(null);
+        setCurrentMissionTried(false);
       };
 
       const handleUseClue = () => {
@@ -839,9 +978,10 @@
         const updatedUser = { ...user, clues: user.clues - 1 };
         setUser(updatedUser);
         setShowClue(true);
-        saveProgress(updatedUser, worlds, completedMissions, artifacts);
+        saveProgress(updatedUser, worlds, completedMissions, artifacts, stats, reflections);
       };
 
+      // Evaluación formativa con andamiaje específico (Criterios 3 y 4)
       const handleVerifyAnswer = () => {
         if (!activeWorld) return;
         const currentMission = activeWorld.missions[currentMissionIdx];
@@ -849,7 +989,7 @@
         if (selectedOption === null || selectedEvidence === null) {
           setChallengeFeedback({
             type: 'error',
-            text: 'Recuerda: para avanzar debes seleccionar tanto tu respuesta como la evidencia del texto que la justifica.'
+            text: '⚠️ Paso incompleto: Recuerda seleccionar tanto tu respuesta (1) como la cita de evidencia textual (2) que la demuestra.'
           });
           return;
         }
@@ -857,26 +997,45 @@
         const isOptionCorrect = selectedOption === currentMission.correctOption;
         const isEvidenceCorrect = selectedEvidence === currentMission.correctEvidence;
 
+        const nextStats = {
+          totalAttempts: stats.totalAttempts + 1,
+          correctFirstTry: (!currentMissionTried && isOptionCorrect && isEvidenceCorrect)
+            ? stats.correctFirstTry + 1
+            : stats.correctFirstTry
+        };
+        setStats(nextStats);
+        setCurrentMissionTried(true);
+
         if (isOptionCorrect && isEvidenceCorrect) {
           setChallengeFeedback({
             type: 'success',
             text: currentMission.feedbackSuccess
           });
+          saveProgress(user, worlds, completedMissions, artifacts, nextStats, reflections);
         } else if (isOptionCorrect && !isEvidenceCorrect) {
           setChallengeFeedback({
             type: 'error',
-            text: 'Tu respuesta es acertada, pero la cita que elegiste no es la evidencia textual que la comprueba. ¡Revisa el texto con cuidado!'
+            text: `¡Tu respuesta (1) es correcta! Sin embargo, la cita elegida (2) no la comprueba. 💡 Pista de autorregulación: ${currentMission.scaffoldHint}`
           });
+          saveProgress(user, worlds, completedMissions, artifacts, nextStats, reflections);
+        } else if (!isOptionCorrect && isEvidenceCorrect) {
+          setChallengeFeedback({
+            type: 'error',
+            text: `¡Identificaste la cita correcta del texto (2)! Ahora lee con atención esa cita para corregir tu respuesta en la pregunta (1).`
+          });
+          saveProgress(user, worlds, completedMissions, artifacts, nextStats, reflections);
         } else {
           setChallengeFeedback({
             type: 'error',
-            text: 'Esa interpretación no coincide con las pistas de la lectura. Vuelve a leer el pergamino e inténtalo de nuevo.'
+            text: `Esa interpretación aún no coincide con el pergamino. 💡 Andamiaje del Búho Aurelio: ${currentMission.scaffoldHint}`
           });
+          saveProgress(user, worlds, completedMissions, artifacts, nextStats, reflections);
         }
       };
 
       const handleNextMissionStep = () => {
         if (!activeWorld || !user) return;
+        stopSpeech();
         const currentMission = activeWorld.missions[currentMissionIdx];
 
         const updatedCompleted = completedMissions.includes(currentMission.id)
@@ -885,12 +1044,13 @@
 
         if (currentMissionIdx + 1 < activeWorld.missions.length) {
           setCompletedMissions(updatedCompleted);
-          saveProgress(user, worlds, updatedCompleted, artifacts);
+          saveProgress(user, worlds, updatedCompleted, artifacts, stats, reflections);
           setCurrentMissionIdx(currentMissionIdx + 1);
           setSelectedOption(null);
           setSelectedEvidence(null);
           setShowClue(false);
           setChallengeFeedback(null);
+          setCurrentMissionTried(false);
         } else {
           const nextWorldId = activeWorld.id + 1;
           const updatedWorlds = worlds.map((w) => {
@@ -914,15 +1074,35 @@
           setCompletedMissions(updatedCompleted);
           setArtifacts(updatedArtifacts);
           setUser(updatedUser);
-          saveProgress(updatedUser, updatedWorlds, updatedCompleted, updatedArtifacts);
+          saveProgress(updatedUser, updatedWorlds, updatedCompleted, updatedArtifacts, stats, reflections);
           setMissionPhase('worldComplete');
         }
+      };
+
+      const handleSaveWorldReflection = () => {
+        if (!activeWorld) return;
+        const nextReflections = {
+          ...reflections,
+          [activeWorld.id]: {
+            strategy: selectedReflection,
+            date: new Date().toLocaleDateString('es-CO')
+          }
+        };
+        setReflections(nextReflections);
+        saveProgress(user, worlds, completedMissions, artifacts, stats, nextReflections);
+        setActiveWorld(null);
+        setScreen('map');
       };
 
       const totalMissionsCount = INITIAL_WORLDS.reduce((acc, w) => acc + w.missions.length, 0);
       const storiesRecovered = worlds.filter((w) => w.status === 'unlocked').length;
       const progressPercent = Math.round((completedMissions.length / totalMissionsCount) * 100);
       const currentRank = computeRank(storiesRecovered);
+      const accuracyRate = stats.totalAttempts > 0
+        ? Math.min(100, Math.round((completedMissions.length / stats.totalAttempts) * 100))
+        : 100;
+
+      const fontSizeClass = fontSizeLevel === 0 ? 'text-xs' : fontSizeLevel === 1 ? 'text-[13.5px]' : 'text-[15.5px]';
 
       return (
         <div className="w-full max-w-[412px] min-h-screen sm:min-h-[850px] sm:my-3 bg-[#151030] sm:rounded-[38px] sm:border-[6px] sm:border-[#2B2250] shadow-2xl flex flex-col justify-between overflow-hidden relative">
@@ -935,7 +1115,6 @@
             {/* ================================================================= */}
             {screen === 'register' && (
               <div className="flex flex-col flex-1 justify-between bg-[#0E132F]">
-                {/* Arte superior en alta definición */}
                 <div className="w-full relative overflow-hidden shrink-0">
                   <img
                     src="./assets/hero-register.png"
@@ -944,18 +1123,20 @@
                   />
                 </div>
 
-                {/* Tarjeta morada inferior */}
-                <div className="bg-magic-card border-t-2 border-[#5A479E] rounded-t-[32px] -mt-5 px-6 pt-5 pb-6 shadow-[0_-10px_25px_rgba(0,0,0,0.6)] relative z-10 flex-1 flex flex-col justify-between">
+                <div className="bg-magic-card border-t-2 border-[#5A479E] rounded-t-[32px] -mt-5 px-5 pt-4 pb-5 shadow-[0_-10px_25px_rgba(0,0,0,0.6)] relative z-10 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <h2 className="text-[28px] font-black text-white tracking-tight">
+                    {/* Crédito del Equipo "Eduquémonos con Tics" + Acceso a Diseño Instruccional */}
+                    <TeamCreditBadge onOpenPedagogicalSheet={() => setShowPedagogicalModal(true)} />
+
+                    <div className="flex justify-between items-center mb-2 mt-1">
+                      <h2 className="text-[26px] font-black text-white tracking-tight">
                         Crea tu <span className="text-[#F8C146]">perfil</span>
                       </h2>
                       <MagicBookIcon />
                     </div>
 
                     {authAlert && (
-                      <div className={`mb-3 p-2.5 rounded-xl text-xs font-bold border ${authAlert.type === 'error' ? 'bg-red-950/90 border-red-400 text-red-100' : 'bg-teal-950/90 border-teal-400 text-teal-100'}`}>
+                      <div className={`mb-2.5 p-2.5 rounded-xl text-xs font-bold border ${authAlert.type === 'error' ? 'bg-red-950/90 border-red-400 text-red-100' : 'bg-teal-950/90 border-teal-400 text-teal-100'}`}>
                         {authAlert.msg}
                       </div>
                     )}
@@ -986,7 +1167,7 @@
                     <CustomButton text="Comenzar" onClick={handleRegister} />
                   </div>
 
-                  <div className="flex flex-col items-center gap-2 mt-4">
+                  <div className="flex flex-col items-center gap-1.5 mt-3">
                     <p className="text-center text-[13px] font-semibold text-gray-200">
                       ¿Ya tienes cuenta?{' '}
                       <button
@@ -1003,7 +1184,7 @@
                       <a
                         href="../Mision-Lectura.apk"
                         download="Mision-Lectura.apk"
-                        className="mt-1 inline-flex items-center gap-2 bg-[#161134]/90 hover:bg-[#231B4E] text-[#2CE5D8] border border-[#2CE5D8]/40 px-4 py-1.5 rounded-full text-xs font-extrabold shadow transition-all"
+                        className="mt-1 inline-flex items-center gap-2 bg-[#161134]/90 hover:bg-[#231B4E] text-[#2CE5D8] border border-[#2CE5D8]/40 px-4 py-1 rounded-full text-[11px] font-extrabold shadow transition-all"
                       >
                         <span>📲</span> Descargar App Android (.APK)
                       </a>
@@ -1018,7 +1199,6 @@
             {/* ================================================================= */}
             {screen === 'login' && (
               <div className="flex flex-col flex-1 justify-between bg-[#0E132F]">
-                {/* Arte superior en alta definición */}
                 <div className="w-full relative overflow-hidden shrink-0">
                   <img
                     src="./assets/hero-login.png"
@@ -1027,11 +1207,12 @@
                   />
                 </div>
 
-                {/* Tarjeta morada inferior */}
-                <div className="bg-magic-card border-t-2 border-[#5A479E] rounded-t-[32px] -mt-5 px-6 pt-6 pb-6 shadow-[0_-10px_25px_rgba(0,0,0,0.6)] relative z-10 flex-1 flex flex-col justify-between">
+                <div className="bg-magic-card border-t-2 border-[#5A479E] rounded-t-[32px] -mt-5 px-5 pt-4 pb-5 shadow-[0_-10px_25px_rgba(0,0,0,0.6)] relative z-10 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-[28px] font-black text-white tracking-tight">
+                    <TeamCreditBadge onOpenPedagogicalSheet={() => setShowPedagogicalModal(true)} />
+
+                    <div className="flex justify-between items-center mb-3 mt-1">
+                      <h2 className="text-[26px] font-black text-white tracking-tight">
                         Ingres<span className="text-[#F8C146]">ar</span>
                       </h2>
                       <MagicBookIcon />
@@ -1089,22 +1270,38 @@
             {screen === 'dashboard' && user && (
               <div className="flex flex-col flex-1 justify-between bg-[#151030]">
                 <div className="flex-1 flex flex-col">
-                  {/* Cabecera Ilustrada */}
+                  {/* Cabecera Ilustrada con botones de Ayuda Autoexplicativa y Guía Docente */}
                   <div className="w-full relative shrink-0">
                     <img
                       src="./assets/hero-dashboard.png"
                       alt="Perfil del Guardián"
                       className="w-full h-auto object-cover block"
                     />
+                    <div className="absolute top-2.5 right-3 flex items-center gap-1.5 z-20">
+                      <button
+                        onClick={() => setShowOnboarding(true)}
+                        className="bg-[#161134]/90 hover:bg-[#281F54] text-[#F8C146] border border-[#F8C146]/50 px-2.5 py-1 rounded-full text-[11px] font-extrabold shadow-lg"
+                        title="Tutorial interactivo de la aplicación"
+                      >
+                        ❓ ¿Cómo jugar?
+                      </button>
+                      <button
+                        onClick={() => setShowPedagogicalModal(true)}
+                        className="bg-[#161134]/90 hover:bg-[#281F54] text-[#2CE5D8] border border-[#2CE5D8]/50 px-2.5 py-1 rounded-full text-[11px] font-extrabold shadow-lg"
+                        title="Diseño Instruccional y Créditos"
+                      >
+                        📋 Diseño
+                      </button>
+                    </div>
                   </div>
 
                   {/* Tarjeta Principal del Guardián */}
-                  <div className="px-3.5 -mt-5 relative z-10 flex-1 flex flex-col justify-center pb-3">
+                  <div className="px-3.5 -mt-5 relative z-10 flex-1 flex flex-col justify-center pb-2">
                     <div className="bg-magic-card border-2 border-[#58489C] border-t-[#F8C146] rounded-[30px] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.65)]">
                       
-                      {/* Fila Superior: Avatar Circular con anillo dorado + Nombre + Pergamino de Rango */}
-                      <div className="flex items-center gap-3.5 mb-4">
-                        <div className="w-28 h-28 rounded-full p-1 bg-gradient-to-b from-[#FCE07D] via-[#F5B124] to-[#B67611] shadow-[0_0_20px_rgba(248,193,70,0.4)] shrink-0">
+                      {/* Fila Superior: Avatar Circular + Nombre + Rango */}
+                      <div className="flex items-center gap-3.5 mb-3">
+                        <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-b from-[#FCE07D] via-[#F5B124] to-[#B67611] shadow-[0_0_20px_rgba(248,193,70,0.4)] shrink-0">
                           <img
                             src="./assets/avatar-owl.png"
                             alt="Avatar Guardián"
@@ -1114,32 +1311,32 @@
 
                         <div className="text-left flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <h2 className="text-[26px] font-black text-white truncate leading-tight">{user.name}</h2>
+                            <h2 className="text-[24px] font-black text-white truncate leading-tight">{user.name}</h2>
                             <span className="bg-[#2D245E] text-[#F8C146] text-[11px] font-extrabold px-2 py-0.5 rounded-full border border-[#F8C146]/40 shrink-0">
                               {user.grade}
                             </span>
                           </div>
-                          <p className="text-xs font-bold text-gray-200 mb-1.5">Rango:</p>
+                          <p className="text-xs font-bold text-gray-200 mb-1">Rango:</p>
                           
-                          {/* Listón de pergamino clásico */}
-                          <div className="bg-parchment-ribbon text-[#3A2512] text-xs font-black px-3 py-1.5 rounded-lg border-2 border-[#C29860] inline-flex items-center gap-1.5 shadow-md">
+                          <div className="bg-parchment-ribbon text-[#3A2512] text-xs font-black px-3 py-1 rounded-lg border-2 border-[#C29860] inline-flex items-center gap-1.5 shadow-md">
                             <span className="text-sm text-[#8F5B1D]">🧭</span>
                             <span className="truncate">{currentRank}</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Barra de Progreso General estilo Mockup 3 */}
-                      <div className="bg-[#1B143D]/90 border border-[#483A7E] rounded-2xl p-3 mb-3.5 flex items-center gap-3 shadow-inner">
-                        <div className="w-11 h-11 rounded-xl bg-[#282054] border border-[#52438C] flex items-center justify-center shrink-0 shadow">
-                          <span className="text-xl">📖</span>
+                      {/* Barra de Progreso General */}
+                      <div className="bg-[#1B143D]/90 border border-[#483A7E] rounded-2xl p-2.5 mb-3 flex items-center gap-3 shadow-inner">
+                        <div className="w-10 h-10 rounded-xl bg-[#282054] border border-[#52438C] flex items-center justify-center shrink-0 shadow">
+                          <span className="text-lg">📖</span>
                         </div>
                         <div className="flex-1">
-                          <div className="text-left text-[13px] font-extrabold text-white mb-1">
-                            Progreso general
+                          <div className="flex justify-between items-center text-[12px] font-extrabold text-white mb-1">
+                            <span>Progreso general</span>
+                            <span className="text-[11px] text-[#2CE5D8]">Precisión: {accuracyRate}%</span>
                           </div>
                           <div className="flex items-center gap-2.5">
-                            <div className="flex-1 h-4 bg-[#2F2560] border border-[#564792] rounded-full overflow-hidden p-0.5">
+                            <div className="flex-1 h-3.5 bg-[#2F2560] border border-[#564792] rounded-full overflow-hidden p-0.5">
                               <div
                                 className="h-full bg-gradient-to-r from-[#F59E0B] via-[#F8C146] to-[#FDE047] rounded-full transition-all duration-500"
                                 style={{ width: `${Math.max(6, progressPercent)}%` }}
@@ -1173,6 +1370,13 @@
                         text={completedMissions.length === 0 ? "Comenzar aventura" : "Continuar aventura"}
                         onClick={() => setScreen('map')}
                       />
+
+                      {/* Sello del Equipo Autor */}
+                      <div className="mt-2.5 text-center">
+                        <span className="text-[10px] font-bold text-[#A69ECF]">
+                          Proyecto educativo del equipo <strong className="text-[#F8C146]">Eduquémonos con Tics</strong>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1194,10 +1398,15 @@
                       alt="Mapa del Archivo"
                       className="w-full h-auto object-cover block"
                     />
+                    <button
+                      onClick={() => setShowOnboarding(true)}
+                      className="absolute top-2.5 right-3 bg-[#161134]/90 hover:bg-[#281F54] text-[#F8C146] border border-[#F8C146]/50 px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-lg"
+                    >
+                      ❓ Guía
+                    </button>
                   </div>
 
                   <div className="px-3.5 pt-2">
-                    {/* Título Mapa del archivo y Contador de Misiones con mini barra */}
                     <div className="flex items-center justify-between mb-3">
                       <h1 className="text-[22px] font-black text-white tracking-tight">
                         Mapa del <span className="text-[#F8C146]">archivo</span>
@@ -1220,7 +1429,6 @@
 
                     {/* Ruta vertical conectada de los primeros 4 mundos */}
                     <div className="space-y-2.5 relative pl-6">
-                      {/* Línea punteada conectora */}
                       <div className="absolute left-2.5 top-5 bottom-5 w-0.5 border-l-2 border-dashed border-[#5E5294]"></div>
 
                       {worlds.slice(0, 4).map((lvl) => {
@@ -1231,7 +1439,6 @@
 
                         return (
                           <div key={lvl.id} className="relative flex items-center">
-                            {/* Nodo luminoso lateral izquierdo */}
                             <div
                               className={`absolute -left-6 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold border-2 z-10 ${
                                 isAvailable
@@ -1250,7 +1457,6 @@
                               )}
                             </div>
 
-                            {/* Tarjeta del Nivel con miniatura ilustrada */}
                             <div
                               onClick={() => openWorldMission(lvl)}
                               className={`w-full bg-[#221A4B]/95 rounded-2xl p-2 flex items-center gap-3 border-2 transition-all ${
@@ -1261,7 +1467,6 @@
                                   : 'border-[#463B78] opacity-90 cursor-not-allowed'
                               }`}
                             >
-                              {/* Miniatura Ilustrada HD */}
                               <div className="w-[128px] h-[72px] rounded-xl overflow-hidden shrink-0 relative border border-white/15 shadow-md">
                                 <img
                                   src={lvl.thumbnail}
@@ -1273,7 +1478,6 @@
                                 </span>
                               </div>
 
-                              {/* Datos y Botón de Estado */}
                               <div className="flex-1 text-left min-w-0 pr-1">
                                 <h3 className="font-black text-[15px] text-white leading-tight truncate">{lvl.title}</h3>
                                 <p className="text-[11px] text-gray-300 mb-2 truncate">{lvl.category}</p>
@@ -1309,7 +1513,7 @@
                       })}
                     </div>
 
-                    {/* Quinto Mundo: La Bóveda del Archivo (Misión Final Integradora) */}
+                    {/* Quinto Mundo: La Bóveda del Archivo */}
                     {worlds[4] && (
                       <div
                         onClick={() => openWorldMission(worlds[4])}
@@ -1359,32 +1563,63 @@
             )}
 
             {/* ================================================================= */}
-            {/* PESTAÑA COMPLEMENTARIA: MISIONES (Bitácora Pedagógica)             */}
+            {/* PESTAÑA: MISIONES Y MONITOREO DE AUTORREGULACIÓN (Criterio 4)     */}
             {/* ================================================================= */}
             {screen === 'missions' && user && (
               <div className="flex flex-col flex-1 justify-between bg-[#151030]">
                 <div className="p-4 overflow-y-auto no-scrollbar">
-                  <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-1">
-                    Bitácora de Misiones
+                  <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-0.5">
+                    Bitácora y Autoevaluación
                   </h1>
-                  <p className="text-xs text-center text-gray-300 mb-4">
-                    Seguimiento formativo por nivel de comprensión lectora
+                  <p className="text-xs text-center text-gray-300 mb-3">
+                    Monitoreo por competencia lectora y autorregulación
                   </p>
+
+                  {/* Panel de Monitoreo Formativo Global */}
+                  <div className="bg-[#221A4B] border border-[#F8C146]/50 rounded-2xl p-3 mb-3.5 text-left shadow-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-xs font-black text-[#F8C146]">📊 Panel de Monitoreo del Aprendizaje</span>
+                      <span className="text-[11px] font-extrabold text-[#2CE5D8]">Precisión: {accuracyRate}%</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div className="bg-[#161134] p-2 rounded-xl border border-[#453878]">
+                        <span className="text-gray-400 block">Misiones superadas:</span>
+                        <strong className="text-white text-sm">{completedMissions.length} de {totalMissionsCount}</strong>
+                      </div>
+                      <div className="bg-[#161134] p-2 rounded-xl border border-[#453878]">
+                        <span className="text-gray-400 block">Aciertos al 1.er intento:</span>
+                        <strong className="text-[#F8C146] text-sm">{stats.correctFirstTry} misiones</strong>
+                      </div>
+                    </div>
+                  </div>
 
                   <div className="space-y-3">
                     {worlds.map((w) => {
                       const doneInWorld = w.missions.filter((m) => completedMissions.includes(m.id)).length;
+                      const worldPct = Math.round((doneInWorld / w.missions.length) * 100);
+                      const masteryLabel = doneInWorld === 3 ? 'Logrado 🌟' : doneInWorld > 0 ? 'En proceso 📈' : 'Por iniciar ⏳';
+                      const worldReflection = reflections[w.id];
+
                       return (
                         <div key={w.id} className="bg-[#221A4B] border border-[#52438C] rounded-2xl p-3 text-left shadow-md">
-                          <div className="flex justify-between items-center mb-1.5">
+                          <div className="flex justify-between items-center mb-1">
                             <span className="font-extrabold text-sm text-[#F8C146]">{w.title}</span>
-                            <span className="text-xs font-bold bg-[#151030] px-2.5 py-0.5 rounded-full text-[#2CE5D8] border border-[#2CE5D8]/30">
-                              {doneInWorld}/3 superadas
+                            <span className="text-[10px] font-black bg-[#151030] px-2.5 py-0.5 rounded-full text-[#2CE5D8] border border-[#2CE5D8]/30">
+                              {masteryLabel} ({doneInWorld}/3)
                             </span>
                           </div>
-                          <p className="text-[11px] text-gray-300 mb-2">
-                            Habilidad: <strong className="text-white">{w.category}</strong> ({w.textType})
+                          <p className="text-[11px] text-amber-100/90 mb-1.5 leading-snug">
+                            <strong>Meta ({w.category}):</strong> {w.learningOutcome}
                           </p>
+
+                          {/* Barra de dominio por competencia */}
+                          <div className="w-full h-2 bg-[#151030] rounded-full overflow-hidden mb-2">
+                            <div
+                              className="h-full bg-gradient-to-r from-[#2CE5D8] to-[#F8C146]"
+                              style={{ width: `${Math.max(5, worldPct)}%` }}
+                            ></div>
+                          </div>
+
                           <div className="space-y-1">
                             {w.missions.map((m, idx) => {
                               const isDone = completedMissions.includes(m.id);
@@ -1398,6 +1633,12 @@
                               );
                             })}
                           </div>
+
+                          {worldReflection && (
+                            <div className="mt-2 bg-[#161134]/90 border border-[#2CE5D8]/40 rounded-xl p-2 text-[11px] text-teal-100">
+                              🧠 <strong>Estrategia de autorregulación registrada:</strong> "{worldReflection.strategy}"
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -1408,7 +1649,7 @@
             )}
 
             {/* ================================================================= */}
-            {/* PESTAÑA COMPLEMENTARIA: MOCHILA (Artefactos y Pistas del Archivo)  */}
+            {/* PESTAÑA: MOCHILA (Artefactos y Pistas del Archivo)                */}
             {/* ================================================================= */}
             {screen === 'backpack' && user && (
               <div className="flex flex-col flex-1 justify-between bg-[#151030]">
@@ -1420,7 +1661,6 @@
                     Reliquias recuperadas mediante evidencias textuales
                   </p>
 
-                  {/* Cristales de pista */}
                   <div className="bg-[#221A4B] border-2 border-[#2CE5D8]/60 rounded-2xl p-3.5 mb-4 flex items-center gap-3 shadow-lg">
                     <div className="w-14 h-14 bg-[#161134] p-2 rounded-2xl flex items-center justify-center shrink-0">
                       <img src="./assets/icon-crystal.png" alt="Cristales" className="w-full h-full object-contain" />
@@ -1465,44 +1705,63 @@
             )}
 
             {/* ================================================================= */}
-            {/* PESTAÑA COMPLEMENTARIA: PERFIL Y FICHA PEDAGÓGICA                  */}
+            {/* PESTAÑA: PERFIL, CRÉDITOS Y DISEÑO INSTRUCCIONAL                  */}
             {/* ================================================================= */}
             {screen === 'profile' && user && (
               <div className="flex flex-col flex-1 justify-between bg-[#151030]">
                 <div className="p-4 overflow-y-auto no-scrollbar text-left">
-                  <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-3">
+                  <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-2">
                     Credencial del Guardián
                   </h1>
 
-                  <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-4 mb-4 space-y-2 text-xs shadow-lg">
+                  {/* Tarjeta destacada del Equipo Autor */}
+                  <div className="bg-gradient-to-r from-[#281F54] via-[#1E295B] to-[#281F54] border-2 border-[#F8C146] rounded-2xl p-3.5 mb-3.5 shadow-lg">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="bg-[#F8C146] text-[#1D1636] text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">
+                        Equipo Autor e Idea Original
+                      </span>
+                      <span className="text-lg">💡🎓</span>
+                    </div>
+                    <h2 className="text-lg font-black text-[#2CE5D8] leading-tight">
+                      Eduquémonos con Tics
+                    </h2>
+                    <p className="text-[11px] text-gray-200 mt-1 leading-snug">
+                      Innovación pedagógica y competencia digital docente aplicada al fortalecimiento de la comprensión lectora en 5.° grado.
+                    </p>
+                    <button
+                      onClick={() => setShowPedagogicalModal(true)}
+                      className="mt-2.5 w-full bg-[#161134] hover:bg-[#231B4E] text-[#F8C146] border border-[#F8C146]/50 py-1.5 rounded-xl text-xs font-extrabold transition-all"
+                    >
+                      📋 Ver Matriz de Diseño Instruccional y Criterios
+                    </button>
+                  </div>
+
+                  <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5 mb-3.5 space-y-2 text-xs shadow-lg">
                     <div className="flex justify-between border-b border-white/10 pb-1.5">
-                      <span className="text-gray-300">Nombre:</span>
+                      <span className="text-gray-300">Estudiante Guardián:</span>
                       <span className="font-extrabold text-white">{user.name}</span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-1.5">
-                      <span className="text-gray-300">Grado:</span>
+                      <span className="text-gray-300">Grado Escolar:</span>
                       <span className="font-extrabold text-[#F8C146]">{user.grade}</span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-1.5">
-                      <span className="text-gray-300">Institución:</span>
+                      <span className="text-gray-300">Institución Educativa:</span>
                       <span className="font-extrabold text-white">I. E. San José de Marinilla</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Rango actual:</span>
+                      <span className="text-gray-300">Rango alcanzado:</span>
                       <span className="font-extrabold text-[#2CE5D8]">{currentRank}</span>
                     </div>
                   </div>
 
-                  <div className="bg-[#1B143D] border border-[#483A7E] rounded-2xl p-3.5 mb-4 text-xs space-y-1.5">
-                    <h3 className="font-extrabold text-[#F8C146] text-sm">Secuencia Didáctica Activa</h3>
-                    <p className="text-gray-200 leading-relaxed">
-                      • <strong>Exploración:</strong> Activación del reto narrativo en cada mundo.<br/>
-                      • <strong>Aprendizaje:</strong> Lectura guiada y uso de pistas.<br/>
-                      • <strong>Práctica y Evaluación:</strong> Resolución de misiones justificando cada decisión con <em>evidencia textual</em>.
-                    </p>
-                  </div>
-
                   <div className="space-y-2">
+                    <button
+                      onClick={() => setShowOnboarding(true)}
+                      className="w-full bg-[#221A4B] hover:bg-[#2E2460] text-[#F8C146] font-extrabold py-2.5 rounded-full text-xs border border-[#F8C146]/40"
+                    >
+                      ❓ Abrir Tutorial Autoexplicativo de Uso
+                    </button>
                     {!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) && (
                       <a
                         href="../Mision-Lectura.apk"
@@ -1533,13 +1792,134 @@
           </div>
 
           {/* ================================================================= */}
-          {/* MODAL INTERACTIVO DE SECUENCIA DIDÁCTICA                           */}
+          {/* MODAL 1: TUTORIAL AUTOEXPLICATIVO DE USABILIDAD (Criterio 2)      */}
+          {/* ================================================================= */}
+          {showOnboarding && (
+            <div className="absolute inset-0 bg-[#0B081D]/95 backdrop-blur-md z-50 p-5 flex flex-col justify-between overflow-y-auto no-scrollbar text-left">
+              <div className="flex justify-between items-center border-b border-white/15 pb-3">
+                <div>
+                  <span className="text-[10px] font-black uppercase text-[#2CE5D8]">Guía Autoexplicativa de Usuario</span>
+                  <h2 className="text-lg font-black text-[#F8C146]">¿Cómo jugar en Misión Lectura?</h2>
+                </div>
+                <button
+                  onClick={() => setShowOnboarding(false)}
+                  className="bg-[#281F54] text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20"
+                >
+                  ✕ Cerrar
+                </button>
+              </div>
+
+              <div className="space-y-3 my-auto py-3">
+                <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5 flex items-start gap-3">
+                  <span className="text-2xl bg-[#151030] p-2.5 rounded-xl">🗺️</span>
+                  <div>
+                    <h3 className="font-extrabold text-sm text-[#F8C146]">1. Explora los 5 Mundos del Mapa</h3>
+                    <p className="text-xs text-gray-200 leading-relaxed mt-0.5">
+                      Avanza en orden desde la <strong>Cámara de las Pistas</strong> (nivel literal) hasta <strong>La Bóveda del Archivo</strong> (misión integradora).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5 flex items-start gap-3">
+                  <span className="text-2xl bg-[#151030] p-2.5 rounded-xl">🔊</span>
+                  <div>
+                    <h3 className="font-extrabold text-sm text-[#2CE5D8]">2. Lee o Escucha con Herramientas Interactivas</h3>
+                    <p className="text-xs text-gray-200 leading-relaxed mt-0.5">
+                      En cada lectura puedes activar la <strong>narración por voz</strong>, ajustar el <strong>tamaño de letra (A+/A-)</strong>, consultar el <strong>glosario</strong> o usar <strong>cristales de pista (💎)</strong>.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5 flex items-start gap-3">
+                  <span className="text-2xl bg-[#151030] p-2.5 rounded-xl">⚖️</span>
+                  <div>
+                    <h3 className="font-extrabold text-sm text-[#F8C146]">3. Responde y Justifica con Evidencia</h3>
+                    <p className="text-xs text-gray-200 leading-relaxed mt-0.5">
+                      Para superar cada misión debes elegir la <strong>respuesta correcta (1)</strong> y comprobarla seleccionando la <strong>cita textual exacta (2)</strong>.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-[#161134] border border-[#2CE5D8]/40 rounded-2xl p-3 text-center">
+                  <p className="text-[11px] text-gray-200">
+                    💡 Idea y diseño pedagógico por el equipo <strong className="text-[#2CE5D8]">Eduquémonos con Tics</strong>
+                  </p>
+                </div>
+              </div>
+
+              <CustomButton text="¡Entendido, vamos a leer!" onClick={() => setShowOnboarding(false)} />
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* MODAL 2: MATRIZ DE DISEÑO INSTRUCCIONAL Y CRITERIOS (Criterios 1-5) */}
+          {/* ================================================================= */}
+          {showPedagogicalModal && (
+            <div className="absolute inset-0 bg-[#0B081D]/95 backdrop-blur-md z-50 p-4 flex flex-col justify-between overflow-y-auto no-scrollbar text-left">
+              <div className="flex justify-between items-center border-b border-white/15 pb-2.5 shrink-0">
+                <div>
+                  <span className="text-[10px] font-black uppercase text-[#2CE5D8]">Fundamentación Pedagógica y Didáctica</span>
+                  <h2 className="text-base font-black text-[#F8C146]">Equipo: Eduquémonos con Tics</h2>
+                </div>
+                <button
+                  onClick={() => setShowPedagogicalModal(false)}
+                  className="bg-[#281F54] text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20"
+                >
+                  ✕ Cerrar
+                </button>
+              </div>
+
+              <div className="space-y-2.5 my-3 overflow-y-auto no-scrollbar text-xs">
+                <div className="bg-[#221A4B] border border-[#F8C146]/60 rounded-2xl p-3">
+                  <h3 className="font-black text-[#F8C146] text-xs mb-1">1. Alineación del Diseño Instruccional</h3>
+                  <p className="text-gray-200 text-[11px] leading-relaxed">
+                    • <strong>Población:</strong> Grado 5.° (I. E. San José de Marinilla).<br/>
+                    • <strong>Problema de aprendizaje:</strong> Dificultad para localizar información explícita, deducir sentido implícito, valorar posturas críticas y sustentar respuestas con citas del texto.<br/>
+                    • <strong>Secuencia Didáctica en 4 Fases:</strong> 1) Exploración (Meta y RA), 2) Aprendizaje Guiado (Lectura, Audio, Glosario y Pistas), 3) Práctica Activa y Evaluación (Pregunta + Evidencia Textual), 4) Autorregulación y Recompensa.
+                  </p>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#2CE5D8]/50 rounded-2xl p-3">
+                  <h3 className="font-black text-[#2CE5D8] text-xs mb-1">2. Usabilidad y Experiencia Autoexplicativa (UX)</h3>
+                  <p className="text-gray-200 text-[11px] leading-relaxed">
+                    Interfaz gamificada adaptada a niños de 10 a 11 años con tutorial interactivo integrado, navegación iconográfica intuitiva, control de tamaño de fuente (A-/A+) y síntesis de voz en español.
+                  </p>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3">
+                  <h3 className="font-black text-[#F8C146] text-xs mb-1">3. Aprendizaje Activo y Autónomo</h3>
+                  <p className="text-gray-200 text-[11px] leading-relaxed">
+                    Doble verificación cognitiva (comprensión + selección de evidencia textual), glosario interactivo en cada lectura y andamiaje (pistas formativas) cuando el estudiante se equivoca.
+                  </p>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3">
+                  <h3 className="font-black text-[#2CE5D8] text-xs mb-1">4. Evaluación, Monitoreo y Autorregulación</h3>
+                  <p className="text-gray-200 text-[11px] leading-relaxed">
+                    Monitoreo en tiempo real del porcentaje de avance, tasa de precisión lectora, nivel de logro por competencia en la Bitácora y registro metacognitivo de estrategias al culminar cada mundo.
+                  </p>
+                </div>
+
+                <div className="bg-[#221A4B] border border-[#F8C146]/60 rounded-2xl p-3">
+                  <h3 className="font-black text-[#F8C146] text-xs mb-1">5. Innovación Tecnológica y Competencia Digital</h3>
+                  <p className="text-gray-200 text-[11px] leading-relaxed">
+                    Ecosistema multiplataforma 100% funcional Offline/Online (Web App React + Servidor local Express + APK Nativo Android con Capacitor y persistencia local).
+                  </p>
+                </div>
+              </div>
+
+              <CustomButton text="Volver a la aplicación" onClick={() => setShowPedagogicalModal(false)} />
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* MODAL INTERACTIVO DE SECUENCIA DIDÁCTICA (4 FASES PEDAGÓGICAS)     */}
           {/* ================================================================= */}
           {activeWorld && (
             <div className="absolute inset-0 bg-[#0D0A22]/95 backdrop-blur-md flex flex-col justify-between p-4 z-50 overflow-y-auto no-scrollbar">
               
               {/* Cabecera del Modal */}
-              <div className="flex items-center justify-between border-b border-white/15 pb-2.5 mb-3 shrink-0">
+              <div className="flex items-center justify-between border-b border-white/15 pb-2.5 mb-2.5 shrink-0">
                 <div className="text-left">
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#2CE5D8] block">
                     {activeWorld.category} • {activeWorld.textType}
@@ -1547,30 +1927,52 @@
                   <h2 className="text-lg font-black text-[#F8C146] leading-tight">{activeWorld.title}</h2>
                 </div>
                 <button
-                  onClick={() => setActiveWorld(null)}
+                  onClick={() => {
+                    stopSpeech();
+                    setActiveWorld(null);
+                  }}
                   className="bg-[#261E52] hover:bg-[#34296E] text-gray-200 px-3 py-1 rounded-full text-xs font-bold border border-white/15"
                 >
-                  ✕ Salir al Mapa
+                  ✕ Mapa
                 </button>
               </div>
 
-              {/* FASE 1: EXPLORACIÓN */}
+              {/* Indicador visual de las 4 Fases de la Secuencia Didáctica */}
+              <div className="grid grid-cols-4 gap-1 mb-3 shrink-0 text-[10px] font-extrabold text-center">
+                <div className={`py-1 rounded-lg border ${missionPhase === 'exploration' ? 'bg-[#F8C146] text-[#1D1636] border-white' : 'bg-[#1B143D] text-gray-400 border-[#453878]'}`}>
+                  1. Exploración
+                </div>
+                <div className={`py-1 rounded-lg border ${missionPhase === 'reading' ? 'bg-[#F8C146] text-[#1D1636] border-white' : 'bg-[#1B143D] text-gray-400 border-[#453878]'}`}>
+                  2. Aprendizaje
+                </div>
+                <div className={`py-1 rounded-lg border ${missionPhase === 'challenge' ? 'bg-[#F8C146] text-[#1D1636] border-white' : 'bg-[#1B143D] text-gray-400 border-[#453878]'}`}>
+                  3. Práctica
+                </div>
+                <div className={`py-1 rounded-lg border ${missionPhase === 'worldComplete' ? 'bg-[#2CE5D8] text-[#0E1126] border-white' : 'bg-[#1B143D] text-gray-400 border-[#453878]'}`}>
+                  4. Reflexión
+                </div>
+              </div>
+
+              {/* FASE 1: EXPLORACIÓN (Activación, Resultado de Aprendizaje y Estrategia) */}
               {missionPhase === 'exploration' && (
-                <div className="my-auto bg-magic-card border-2 border-[#F8C146] rounded-3xl p-5 text-left shadow-2xl">
-                  <div className="w-full h-36 rounded-2xl overflow-hidden mb-3.5 border border-[#F8C146]/40 shadow-md">
+                <div className="my-auto bg-magic-card border-2 border-[#F8C146] rounded-3xl p-4 text-left shadow-2xl">
+                  <div className="w-full h-32 rounded-2xl overflow-hidden mb-3 border border-[#F8C146]/40 shadow-md">
                     <img src={activeWorld.thumbnail} alt={activeWorld.title} className="w-full h-full object-cover" />
                   </div>
                   <div className="mb-2">
                     <span className="bg-parchment-ribbon text-[#2C1E14] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">
-                      Fase 1: Exploración
+                      Fase 1: Exploración y Meta Cognitiva
                     </span>
-                    <h3 className="text-base font-black text-white mt-1.5">El llamado del Guardián</h3>
+                    <h3 className="text-base font-black text-white mt-1">El llamado del Guardián</h3>
                   </div>
-                  <p className="text-xs text-gray-200 leading-relaxed bg-[#151030] p-3.5 rounded-2xl border border-[#453878] mb-3.5">
+                  <p className="text-xs text-gray-200 leading-relaxed bg-[#151030] p-3 rounded-2xl border border-[#453878] mb-2.5">
                     {activeWorld.explorationIntro}
                   </p>
-                  <div className="bg-[#261E52] rounded-xl p-3 text-xs text-amber-200 mb-3 border border-amber-400/30">
-                    🎯 <strong>Meta de aprendizaje:</strong> Supera las 3 misiones de este mundo seleccionando la respuesta correcta y <strong>justificando tu decisión con una cita textual</strong>.
+                  <div className="bg-[#1B143D] rounded-xl p-2.5 text-[11px] text-[#2CE5D8] mb-2 border border-[#2CE5D8]/30">
+                    🎓 <strong>Resultado de Aprendizaje:</strong> {activeWorld.learningOutcome}
+                  </div>
+                  <div className="bg-[#261E52] rounded-xl p-2.5 text-[11px] text-amber-200 mb-2 border border-amber-400/30">
+                    🧭 <strong>Estrategia recomendada:</strong> {activeWorld.strategyTip}
                   </div>
                   <CustomButton
                     text="Abrir pergamino de lectura"
@@ -1579,64 +1981,113 @@
                 </div>
               )}
 
-              {/* FASE 2: APRENDIZAJE (Lectura guiada y reconocimiento de pistas) */}
+              {/* FASE 2: APRENDIZAJE GUIADO (Lectura, Audio TTS, Tamaño de Fuente, Glosario y Pistas) */}
               {missionPhase === 'reading' && (
                 <div className="flex-1 flex flex-col justify-between overflow-y-auto no-scrollbar">
-                  <div className="bg-magic-card border border-[#56478E] rounded-3xl p-4 text-left shadow-xl mb-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="bg-parchment-ribbon text-[#2C1E14] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">
-                        Fase 2: Lectura Guiada
-                      </span>
+                  <div className="bg-magic-card border border-[#56478E] rounded-3xl p-3.5 text-left shadow-xl mb-3">
+                    {/* Barra de herramientas interactivas de lectura (Criterio 5) */}
+                    <div className="flex flex-wrap justify-between items-center gap-1.5 mb-2.5">
                       <button
-                        onClick={handleUseClue}
-                        className="bg-[#151030] hover:bg-[#261E52] text-[#2CE5D8] border border-[#2CE5D8]/50 px-2.5 py-1 rounded-full text-[11px] font-extrabold flex items-center gap-1"
+                        onClick={() => toggleSpeech(activeWorld)}
+                        className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold border flex items-center gap-1 transition-all ${
+                          isSpeaking
+                            ? 'bg-amber-400 text-[#1D1636] border-white animate-pulse'
+                            : 'bg-[#151030] text-[#F8C146] border-[#F8C146]/50 hover:bg-[#261E52]'
+                        }`}
                       >
-                        💎 Usar pista ({user?.clues || 0})
+                        {isSpeaking ? '⏹ Detener voz' : '🔊 Escuchar lectura'}
                       </button>
+
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
+                          className="bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black"
+                          title="Reducir letra"
+                        >
+                          A-
+                        </button>
+                        <button
+                          onClick={() => setFontSizeLevel((prev) => Math.min(2, prev + 1))}
+                          className="bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black"
+                          title="Aumentar letra"
+                        >
+                          A+
+                        </button>
+                        <button
+                          onClick={() => setShowGlossary(!showGlossary)}
+                          className="bg-[#151030] text-[#2CE5D8] border border-[#2CE5D8]/50 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold"
+                        >
+                          📚 Glosario
+                        </button>
+                        <button
+                          onClick={handleUseClue}
+                          className="bg-[#151030] hover:bg-[#261E52] text-[#F8C146] border border-[#F8C146]/50 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold flex items-center gap-1"
+                        >
+                          💎 Pista ({user?.clues || 0})
+                        </button>
+                      </div>
                     </div>
 
                     <h3 className="font-magic text-base font-bold text-[#F8C146] mb-2">
                       📜 {activeWorld.readingTitle}
                     </h3>
 
-                    <div className="bg-[#F7EFE1] text-[#261C14] p-3.5 rounded-2xl border-2 border-[#C8A97E] space-y-2.5 text-xs leading-relaxed font-semibold shadow-inner">
+                    <div className={`bg-[#F7EFE1] text-[#261C14] p-3.5 rounded-2xl border-2 border-[#C8A97E] space-y-2.5 ${fontSizeClass} leading-relaxed font-semibold shadow-inner`}>
                       {activeWorld.readingPassage.map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                       ))}
                     </div>
 
+                    {/* Glosario contextual interactivo */}
+                    {showGlossary && activeWorld.glossary && (
+                      <div className="mt-2.5 bg-[#151030] border border-[#2CE5D8]/60 rounded-xl p-2.5 text-xs">
+                        <span className="font-black text-[#2CE5D8] block mb-1">📚 Glosario del Pergamino:</span>
+                        <div className="space-y-1">
+                          {activeWorld.glossary.map((g, i) => (
+                            <p key={i} className="text-[11px] text-gray-200">
+                              • <strong className="text-[#F8C146]">{g.term}:</strong> {g.def}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Pista pedagógica del Búho Aurelio */}
                     {showClue && (
-                      <div className="mt-3 bg-teal-950/90 border border-[#2CE5D8] rounded-xl p-2.5 text-xs text-teal-100">
+                      <div className="mt-2.5 bg-teal-950/90 border border-[#2CE5D8] rounded-xl p-2.5 text-xs text-teal-100">
                         💡 <strong>Pista del Búho Aurelio:</strong> {activeWorld.clueHighlight}
                       </div>
                     )}
                   </div>
 
                   <CustomButton
-                    text="Resolver misión con evidencia"
-                    onClick={() => setMissionPhase('challenge')}
+                    text="Ir a las misiones con evidencia"
+                    onClick={() => {
+                      stopSpeech();
+                      setMissionPhase('challenge');
+                    }}
                   />
                 </div>
               )}
 
-              {/* FASE 3: PRÁCTICA Y EVALUACIÓN FORMATIVA (Pregunta + Evidencia Textual) */}
+              {/* FASE 3: PRÁCTICA ACTIVA Y EVALUACIÓN CON RETROALIMENTACIÓN (Criterios 3 y 4) */}
               {missionPhase === 'challenge' && (
                 <div className="flex-1 flex flex-col justify-between overflow-y-auto no-scrollbar text-left">
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between bg-[#221A4B] px-3 py-2 rounded-xl border border-[#56478E]">
                       <span className="text-xs font-extrabold text-[#F8C146]">
                         {activeWorld.missions[currentMissionIdx].stepTitle}
                       </span>
                       <button
                         onClick={() => setMissionPhase('reading')}
-                        className="text-[11px] font-bold text-[#2CE5D8] underline"
+                        className="text-[11px] font-extrabold text-[#2CE5D8] underline"
                       >
-                        📖 Releer texto
+                        📖 Releer pergamino
                       </button>
                     </div>
 
-                    <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5">
-                      <p className="text-xs font-extrabold text-white mb-2.5 leading-snug">
+                    <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3">
+                      <p className="text-xs font-extrabold text-white mb-2 leading-snug">
                         1. {activeWorld.missions[currentMissionIdx].question}
                       </p>
                       <div className="space-y-1.5">
@@ -1659,7 +2110,7 @@
                       </div>
                     </div>
 
-                    <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3.5">
+                    <div className="bg-[#221A4B] border border-[#56478E] rounded-2xl p-3">
                       <p className="text-xs font-extrabold text-[#2CE5D8] mb-2 leading-snug">
                         2. {activeWorld.missions[currentMissionIdx].evidencePrompt}
                       </p>
@@ -1685,7 +2136,7 @@
 
                     {challengeFeedback && (
                       <div
-                        className={`p-3 rounded-2xl border text-xs font-bold ${
+                        className={`p-3 rounded-2xl border text-xs font-bold leading-relaxed ${
                           challengeFeedback.type === 'success'
                             ? 'bg-emerald-950/90 border-emerald-400 text-emerald-100'
                             : 'bg-red-950/90 border-red-400 text-red-100'
@@ -1696,13 +2147,13 @@
                     )}
                   </div>
 
-                  <div className="mt-3 pb-1">
+                  <div className="mt-2.5 pb-1">
                     {challengeFeedback?.type === 'success' ? (
                       <CustomButton
                         text={
                           currentMissionIdx + 1 < activeWorld.missions.length
                             ? "Siguiente misión del mundo"
-                            : "Reclamar reliquia y desbloquear ruta"
+                            : "Reclamar reliquia y autoevaluar"
                         }
                         onClick={handleNextMissionStep}
                       />
@@ -1716,28 +2167,50 @@
                 </div>
               )}
 
-              {/* FASE 4: MUNDO COMPLETADO */}
+              {/* FASE 4: MUNDO COMPLETADO Y AUTORREGULACIÓN METACOGNITIVA (Criterio 4) */}
               {missionPhase === 'worldComplete' && (
-                <div className="my-auto bg-magic-card border-2 border-[#2CE5D8] rounded-3xl p-5 text-center shadow-2xl">
-                  <div className="text-5xl mb-2">{activeWorld.artifact.icon}</div>
-                  <span className="bg-[#2CE5D8] text-[#0E1126] text-[11px] font-black px-3 py-0.5 rounded-full uppercase">
-                    ¡Historia Recuperada!
+                <div className="my-auto bg-magic-card border-2 border-[#2CE5D8] rounded-3xl p-4 text-center shadow-2xl">
+                  <div className="text-4xl mb-1">{activeWorld.artifact.icon}</div>
+                  <span className="bg-[#2CE5D8] text-[#0E1126] text-[10px] font-black px-3 py-0.5 rounded-full uppercase">
+                    ¡Historia Recuperada! (+1 Cristal 💎)
                   </span>
-                  <h3 className="text-xl font-black text-[#F8C146] mt-2 mb-1">
+                  <h3 className="text-lg font-black text-[#F8C146] mt-1.5 mb-1">
                     {activeWorld.artifact.name}
                   </h3>
-                  <p className="text-xs text-gray-200 mb-4 leading-relaxed">
+                  <p className="text-xs text-gray-200 mb-3 leading-relaxed">
                     {activeWorld.artifact.desc}
                   </p>
-                  <div className="bg-[#151030] border border-[#453878] rounded-2xl p-3 text-xs text-amber-200 mb-4">
-                    ✨ Has ganado <strong>+1 Cristal de Pista</strong> y el siguiente mundo del mapa ha sido habilitado.
+
+                  {/* Ejercicio de Autorregulación del Aprendizaje */}
+                  <div className="bg-[#151030] border border-[#56478E] rounded-2xl p-3 text-left mb-3">
+                    <p className="text-xs font-extrabold text-[#F8C146] mb-1.5">
+                      🧠 Reflexión de Autorregulación: ¿Qué estrategia te ayudó más a superar este mundo?
+                    </p>
+                    <div className="space-y-1.5">
+                      {[
+                        'Buscar y subrayar palabras clave en el pergamino',
+                        'Releer el texto para comprobar la cita exacta',
+                        'Relacionar las pistas del texto con mis conocimientos',
+                        'Escuchar el audio o usar el glosario de palabras'
+                      ].map((strat, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedReflection(strat)}
+                          className={`w-full text-left text-[11px] font-bold px-2.5 py-1.5 rounded-xl border transition-all ${
+                            selectedReflection === strat
+                              ? 'bg-[#2CE5D8] text-[#0E1126] border-white'
+                              : 'bg-[#221A4B] text-gray-200 border-[#453878]'
+                          }`}
+                        >
+                          {selectedReflection === strat ? '✔ ' : '○ '}{strat}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+
                   <CustomButton
-                    text="Volver al Mapa del Archivo"
-                    onClick={() => {
-                      setActiveWorld(null);
-                      setScreen('map');
-                    }}
+                    text="Guardar reflexión y volver al Mapa"
+                    onClick={handleSaveWorldReflection}
                   />
                 </div>
               )}
