@@ -756,12 +756,26 @@
         }
       }); // 0: pequeña, 1: normal, 2: grande, 3: muy grande
       const [isSpeaking, setIsSpeaking] = useState(false);
+      const [voiceGender, setVoiceGender] = useState(() => {
+        try {
+          const saved = localStorage.getItem('mision_lectura_voice_gender');
+          return saved === 'male' ? 'male' : 'female';
+        } catch (e) {
+          return 'female';
+        }
+      });
 
       useEffect(() => {
         try {
           localStorage.setItem('mision_lectura_font_size', String(fontSizeLevel));
         } catch (e) {}
       }, [fontSizeLevel]);
+
+      useEffect(() => {
+        try {
+          localStorage.setItem('mision_lectura_voice_gender', voiceGender);
+        } catch (e) {}
+      }, [voiceGender]);
       const [challengeFeedback, setChallengeFeedback] = useState(null);
       const [currentMissionTried, setCurrentMissionTried] = useState(false);
 
@@ -803,19 +817,71 @@
         setIsSpeaking(false);
       };
 
+      // Seleccionar la voz en español más natural (neural/alta calidad) según género
+      const pickBestWebVoice = (voices, gender) => {
+        const esVoices = (voices || []).filter((v) => v.lang && v.lang.toLowerCase().startsWith('es'));
+        if (!esVoices.length) return { voice: null, matchedGender: false };
+
+        const wantMale = gender === 'male';
+        const maleHints = ['pablo', 'jorge', 'diego', 'alvaro', 'álvaro', 'raul', 'raúl', 'tomas', 'tomás', 'gonzalo', 'enrique', 'carlos', 'emilio', 'sebastian', 'sebastián', 'male', 'hombre', 'masculin', 'esd', 'esc', 'eed'];
+        const femaleHints = ['sabina', 'helena', 'laura', 'paulina', 'monica', 'mónica', 'lucia', 'lucía', 'dalia', 'paloma', 'elena', 'camila', 'salome', 'salomé', 'andrea', 'sofia', 'sofía', 'valeria', 'ximena', 'female', 'mujer', 'femenin', 'sfb', 'eef', 'eea'];
+
+        let best = esVoices[0];
+        let bestScore = -999;
+        let bestMatchedGender = false;
+
+        esVoices.forEach((v) => {
+          const name = (v.name || '').toLowerCase();
+          const lang = (v.lang || '').toLowerCase();
+          let score = 0;
+
+          if (name.includes('natural') || name.includes('neural') || name.includes('online')) score += 120;
+          if (name.includes('google') || name.includes('microsoft')) score += 60;
+          if (lang === 'es-co') score += 45;
+          else if (lang === 'es-us' || lang === 'es-419' || lang === 'es-mx') score += 35;
+          else if (lang === 'es-es') score += 20;
+
+          const looksMale = maleHints.some((h) => name.includes(h));
+          const looksFemale = femaleHints.some((h) => name.includes(h));
+          let matchedGender = false;
+
+          if (wantMale && looksMale) {
+            score += 200;
+            matchedGender = true;
+          } else if (!wantMale && looksFemale) {
+            score += 200;
+            matchedGender = true;
+          } else if (wantMale && looksFemale) {
+            score -= 120;
+          } else if (!wantMale && looksMale) {
+            score -= 120;
+          }
+
+          if (score > bestScore) {
+            bestScore = score;
+            best = v;
+            bestMatchedGender = matchedGender;
+          }
+        });
+
+        return { voice: best, matchedGender: bestMatchedGender };
+      };
+
       // Lectura en voz alta (Motor nativo AndroidTTS en APK + Web Speech API en navegador)
-      const toggleSpeech = (world) => {
-        if (isSpeaking) {
+      const toggleSpeech = (world, overrideGender) => {
+        if (isSpeaking && !overrideGender) {
           stopSpeech();
           return;
         }
-        const fullText = `${world.readingTitle}. ${world.readingPassage.join(' ')}`;
+        const selectedGender = overrideGender || voiceGender;
+        const chunks = [world.readingTitle, ...world.readingPassage].filter(Boolean);
+        const fullText = chunks.join('\n');
 
         // 1. Motor nativo Android TextToSpeech (APK Capacitor)
         if (window.AndroidTTS && typeof window.AndroidTTS.speak === 'function') {
           try {
             setIsSpeaking(true);
-            const ok = window.AndroidTTS.speak(fullText);
+            const ok = window.AndroidTTS.speak(fullText, selectedGender);
             if (ok === false) {
               setIsSpeaking(false);
             }
@@ -825,25 +891,35 @@
           }
         }
 
-        // 2. Fallback Web Speech API (Navegador web / GitHub Pages)
+        // 2. Fallback Web Speech API (Navegador web / GitHub Pages) con pausas naturales por párrafo
         if (!('speechSynthesis' in window)) return;
         try {
           const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
           window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(fullText);
-          const esVoice = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith('es'));
-          if (esVoice) utterance.voice = esVoice;
-          utterance.lang = 'es-CO';
-          utterance.rate = 0.95;
-          utterance.onend = () => setIsSpeaking(false);
-          utterance.onerror = () => setIsSpeaking(false);
+          const { voice: esVoice, matchedGender } = pickBestWebVoice(voices, selectedGender);
+          const targetPitch = selectedGender === 'male'
+            ? (matchedGender ? 0.95 : 0.82)
+            : (matchedGender ? 1.03 : 1.08);
+
           setIsSpeaking(true);
-          window.speechSynthesis.speak(utterance);
+          chunks.forEach((chunk, idx) => {
+            const utterance = new SpeechSynthesisUtterance(chunk);
+            if (esVoice) utterance.voice = esVoice;
+            utterance.lang = (esVoice && esVoice.lang) || 'es-CO';
+            utterance.rate = 0.93;
+            utterance.pitch = targetPitch;
+            if (idx === chunks.length - 1) {
+              utterance.onend = () => setIsSpeaking(false);
+              utterance.onerror = () => setIsSpeaking(false);
+            }
+            window.speechSynthesis.speak(utterance);
+          });
+
           setTimeout(() => {
             if (window.speechSynthesis && !window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
               setIsSpeaking(false);
             }
-          }, 2000);
+          }, 2200);
         } catch (e) {
           setIsSpeaking(false);
         }
@@ -1863,28 +1939,51 @@
                     </div>
                   </div>
 
-                  <div className="bg-[#221A4B] border border-[#52438C] rounded-2xl p-3 mb-3 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-extrabold text-[#F8C146] block">🔠 Tamaño de letra</span>
-                      <span className="text-[11px] text-gray-300">Actual: {FONT_SCALE_LABELS[fontSizeLevel]}</span>
+                  <div className="bg-[#221A4B] border border-[#52438C] rounded-2xl p-3 mb-3 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-xs font-extrabold text-[#F8C146] block">🔠 Tamaño de letra</span>
+                        <span className="text-[11px] text-gray-300">Actual: {FONT_SCALE_LABELS[fontSizeLevel]}</span>
+                      </div>
+                      <div className="no-text-scale flex items-center gap-1.5">
+                        <button
+                          onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
+                          disabled={fontSizeLevel === 0}
+                          className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 0 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
+                          title="Reducir letra"
+                        >
+                          A-
+                        </button>
+                        <button
+                          onClick={() => setFontSizeLevel((prev) => Math.min(3, prev + 1))}
+                          disabled={fontSizeLevel === 3}
+                          className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 3 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
+                          title="Aumentar letra"
+                        >
+                          A+
+                        </button>
+                      </div>
                     </div>
-                    <div className="no-text-scale flex items-center gap-1.5">
-                      <button
-                        onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
-                        disabled={fontSizeLevel === 0}
-                        className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 0 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
-                        title="Reducir letra"
-                      >
-                        A-
-                      </button>
-                      <button
-                        onClick={() => setFontSizeLevel((prev) => Math.min(3, prev + 1))}
-                        disabled={fontSizeLevel === 3}
-                        className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 3 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
-                        title="Aumentar letra"
-                      >
-                        A+
-                      </button>
+
+                    <div className="flex items-center justify-between border-t border-white/10 pt-2.5">
+                      <div>
+                        <span className="text-xs font-extrabold text-[#2CE5D8] block">🎙️ Voz de narración</span>
+                        <span className="text-[11px] text-gray-300">Actual: {voiceGender === 'male' ? 'Masculina' : 'Femenina'}</span>
+                      </div>
+                      <div className="no-text-scale flex items-center gap-1.5">
+                        <button
+                          onClick={() => setVoiceGender('female')}
+                          className={`px-2.5 py-1 rounded-xl text-[11px] font-black border transition-all ${voiceGender === 'female' ? 'bg-[#F8C146] text-[#1D1636] border-white' : 'bg-[#151030] text-gray-200 border-white/20'}`}
+                        >
+                          👩 Femenina
+                        </button>
+                        <button
+                          onClick={() => setVoiceGender('male')}
+                          className={`px-2.5 py-1 rounded-xl text-[11px] font-black border transition-all ${voiceGender === 'male' ? 'bg-[#2CE5D8] text-[#0E1126] border-white' : 'bg-[#151030] text-gray-200 border-white/20'}`}
+                        >
+                          👨 Masculina
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -2138,16 +2237,35 @@
                   <div className="bg-magic-card border border-[#56478E] rounded-3xl p-3.5 text-left shadow-xl mb-3">
                     {/* Barra de herramientas interactivas de lectura (Criterio 5) */}
                     <div className="flex flex-wrap justify-between items-center gap-1.5 mb-2.5">
-                      <button
-                        onClick={() => toggleSpeech(activeWorld)}
-                        className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold border flex items-center gap-1 transition-all ${
-                          isSpeaking
-                            ? 'bg-amber-400 text-[#1D1636] border-white animate-pulse'
-                            : 'bg-[#151030] text-[#F8C146] border-[#F8C146]/50 hover:bg-[#261E52]'
-                        }`}
-                      >
-                        {isSpeaking ? '⏹ Detener voz' : '🔊 Escuchar lectura'}
-                      </button>
+                      <div className="no-text-scale flex items-center gap-1">
+                        <button
+                          onClick={() => toggleSpeech(activeWorld)}
+                          className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold border flex items-center gap-1 transition-all ${
+                            isSpeaking
+                              ? 'bg-amber-400 text-[#1D1636] border-white animate-pulse'
+                              : 'bg-[#151030] text-[#F8C146] border-[#F8C146]/50 hover:bg-[#261E52]'
+                          }`}
+                        >
+                          {isSpeaking ? '⏹ Detener' : '🔊 Escuchar'}
+                        </button>
+                        <button
+                          onClick={() => {
+                            const nextGender = voiceGender === 'female' ? 'male' : 'female';
+                            setVoiceGender(nextGender);
+                            if (isSpeaking) {
+                              toggleSpeech(activeWorld, nextGender);
+                            }
+                          }}
+                          className={`px-2 py-1 rounded-full text-[11px] font-extrabold border transition-all ${
+                            voiceGender === 'male'
+                              ? 'bg-[#2CE5D8]/20 text-[#2CE5D8] border-[#2CE5D8]/60'
+                              : 'bg-[#F8C146]/15 text-[#F8C146] border-[#F8C146]/50'
+                          }`}
+                          title="Cambiar entre voz femenina y masculina"
+                        >
+                          {voiceGender === 'male' ? '👨 Masc.' : '👩 Fem.'}
+                        </button>
+                      </div>
 
                       <div className="no-text-scale flex items-center gap-1">
                         <button
