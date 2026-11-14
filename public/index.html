@@ -56,6 +56,18 @@
     .bg-parchment-ribbon {
       background: linear-gradient(90deg, #DFC699 0%, #F5E6C8 50%, #DFC699 100%);
     }
+    /* Escala global de texto ajustable (pergamino y resto de la interfaz) */
+    .app-text-scalable .text-\[10px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(10px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[11px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(11px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[12px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(12px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[13\.5px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(13.5px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[15\.5px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(15.5px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-xs:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(0.75rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-sm:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(0.875rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-base:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-lg:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.125rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-xl:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.25rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-2xl:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.5rem * var(--fs-scale, 1)); }
   </style>
 </head>
 <body class="flex justify-center items-center min-h-screen bg-[#0B081D] text-white">

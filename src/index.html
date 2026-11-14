@@ -58,6 +58,18 @@
     .bg-parchment-ribbon {
       background: linear-gradient(90deg, #DFC699 0%, #F5E6C8 50%, #DFC699 100%);
     }
+    /* Escala global de texto ajustable (pergamino y resto de la interfaz) */
+    .app-text-scalable .text-\[10px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(10px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[11px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(11px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[12px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(12px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[13\.5px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(13.5px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-\[15\.5px\]:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(15.5px * var(--fs-scale, 1)); }
+    .app-text-scalable .text-xs:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(0.75rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-sm:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(0.875rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-base:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-lg:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.125rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-xl:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.25rem * var(--fs-scale, 1)); }
+    .app-text-scalable .text-2xl:not(.no-text-scale):not(.no-text-scale *) { font-size: calc(1.5rem * var(--fs-scale, 1)); }
   </style>
 </head>
 <body class="flex justify-center items-center min-h-screen bg-[#0B081D] text-white">
@@ -679,7 +691,7 @@
         { id: 'profile', label: 'Perfil' },
       ];
       return (
-        <div className="bg-gradient-to-b from-[#251E4E] to-[#171233] border-t-2 border-[#54468E] px-2 pt-2 pb-1.5 flex justify-around items-center rounded-t-[26px] shadow-[0_-6px_20px_rgba(0,0,0,0.5)] shrink-0 relative z-20">
+        <div className="no-text-scale bg-gradient-to-b from-[#251E4E] to-[#171233] border-t-2 border-[#54468E] px-2 pt-2 pb-1.5 flex justify-around items-center rounded-t-[26px] shadow-[0_-6px_20px_rgba(0,0,0,0.5)] shrink-0 relative z-20">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -735,8 +747,21 @@
       const [selectedEvidence, setSelectedEvidence] = useState(null);
       const [showClue, setShowClue] = useState(false);
       const [showGlossary, setShowGlossary] = useState(false);
-      const [fontSizeLevel, setFontSizeLevel] = useState(1); // 0: normal, 1: grande, 2: extra grande
+      const [fontSizeLevel, setFontSizeLevel] = useState(() => {
+        try {
+          const saved = parseInt(localStorage.getItem('mision_lectura_font_size'), 10);
+          return Number.isFinite(saved) && saved >= 0 && saved <= 3 ? saved : 1;
+        } catch (e) {
+          return 1;
+        }
+      }); // 0: pequeña, 1: normal, 2: grande, 3: muy grande
       const [isSpeaking, setIsSpeaking] = useState(false);
+
+      useEffect(() => {
+        try {
+          localStorage.setItem('mision_lectura_font_size', String(fontSizeLevel));
+        } catch (e) {}
+      }, [fontSizeLevel]);
       const [challengeFeedback, setChallengeFeedback] = useState(null);
       const [currentMissionTried, setCurrentMissionTried] = useState(false);
 
@@ -768,6 +793,9 @@
       // Detener síntesis de voz al cambiar de pantalla o cerrar mundo
       const stopSpeech = () => {
         try {
+          if (window.AndroidTTS && typeof window.AndroidTTS.stop === 'function') {
+            window.AndroidTTS.stop();
+          }
           if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
           }
@@ -775,17 +803,33 @@
         setIsSpeaking(false);
       };
 
-      // Lectura en voz alta (Web Speech API - Competencia digital e inclusión)
+      // Lectura en voz alta (Motor nativo AndroidTTS en APK + Web Speech API en navegador)
       const toggleSpeech = (world) => {
-        if (!('speechSynthesis' in window)) return;
         if (isSpeaking) {
           stopSpeech();
           return;
         }
+        const fullText = `${world.readingTitle}. ${world.readingPassage.join(' ')}`;
+
+        // 1. Motor nativo Android TextToSpeech (APK Capacitor)
+        if (window.AndroidTTS && typeof window.AndroidTTS.speak === 'function') {
+          try {
+            setIsSpeaking(true);
+            const ok = window.AndroidTTS.speak(fullText);
+            if (ok === false) {
+              setIsSpeaking(false);
+            }
+            return;
+          } catch (e) {
+            setIsSpeaking(false);
+          }
+        }
+
+        // 2. Fallback Web Speech API (Navegador web / GitHub Pages)
+        if (!('speechSynthesis' in window)) return;
         try {
           const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
           window.speechSynthesis.cancel();
-          const fullText = `${world.readingTitle}. ${world.readingPassage.join(' ')}`;
           const utterance = new SpeechSynthesisUtterance(fullText);
           const esVoice = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith('es'));
           if (esVoice) utterance.voice = esVoice;
@@ -795,25 +839,29 @@
           utterance.onerror = () => setIsSpeaking(false);
           setIsSpeaking(true);
           window.speechSynthesis.speak(utterance);
-          // Respaldo de seguridad si el motor TTS del WebView no dispara eventos
           setTimeout(() => {
-            if (window.speechSynthesis && !window.speechSynthesis.speaking) {
+            if (window.speechSynthesis && !window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
               setIsSpeaking(false);
             }
-          }, 1500);
+          }, 2000);
         } catch (e) {
           setIsSpeaking(false);
         }
       };
 
-      // Pausar narración si la app pasa a segundo plano o se bloquea la pantalla
+      // Pausar narración si la app pasa a segundo plano y escuchar fin de AndroidTTS
       useEffect(() => {
         const handleVisibilityChange = () => {
           if (document.hidden) stopSpeech();
         };
+        const handleAndroidTtsEnd = () => {
+          setIsSpeaking(false);
+        };
         document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('android-tts-end', handleAndroidTtsEnd);
         return () => {
           document.removeEventListener('visibilitychange', handleVisibilityChange);
+          window.removeEventListener('android-tts-end', handleAndroidTtsEnd);
           stopSpeech();
         };
       }, []);
@@ -1157,19 +1205,24 @@
         ? Math.min(100, Math.round((completedMissions.length / stats.totalAttempts) * 100))
         : 0;
 
-      const fontSizeClass = fontSizeLevel === 0 ? 'text-xs' : fontSizeLevel === 1 ? 'text-[13.5px]' : 'text-[15.5px]';
+      const FONT_SCALE_VALUES = [0.92, 1, 1.14, 1.28];
+      const FONT_SCALE_LABELS = ['Pequeña', 'Normal', 'Grande', 'Muy grande'];
+      const fontSizeClass = 'text-[13.5px]';
 
       return (
-        <div className="w-full max-w-[412px] min-h-screen sm:min-h-[850px] sm:my-3 bg-[#151030] sm:rounded-[38px] sm:border-[6px] sm:border-[#2B2250] shadow-2xl flex flex-col justify-between overflow-hidden relative">
+        <div
+          style={{ '--fs-scale': FONT_SCALE_VALUES[fontSizeLevel] }}
+          className="app-text-scalable w-full max-w-[412px] h-[100dvh] sm:h-[850px] sm:max-h-[92vh] sm:my-3 bg-[#151030] sm:rounded-[38px] sm:border-[6px] sm:border-[#2B2250] shadow-2xl flex flex-col justify-between overflow-hidden relative"
+        >
           
           {/* CONTENEDOR DE PANTALLAS */}
-          <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col justify-between">
+          <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
             
             {/* ================================================================= */}
             {/* PANTALLA 1: REGISTRO ("Crea tu perfil") - Fiel a Mockup 1         */}
             {/* ================================================================= */}
             {screen === 'register' && (
-              <div className="flex flex-col flex-1 justify-between bg-[#0E132F]">
+              <div className="flex flex-col flex-1 min-h-0 overflow-y-auto no-scrollbar justify-between bg-[#0E132F]">
                 <div className="w-full relative overflow-hidden shrink-0">
                   <img
                     src="./assets/hero-register.png"
@@ -1253,7 +1306,7 @@
             {/* PANTALLA 2: INICIO DE SESIÓN ("Ingresar") - Fiel a Mockup 2       */}
             {/* ================================================================= */}
             {screen === 'login' && (
-              <div className="flex flex-col flex-1 justify-between bg-[#0E132F]">
+              <div className="flex flex-col flex-1 min-h-0 overflow-y-auto no-scrollbar justify-between bg-[#0E132F]">
                 <div className="w-full relative overflow-hidden shrink-0">
                   <img
                     src="./assets/hero-login.png"
@@ -1323,8 +1376,8 @@
             {/* PANTALLA 3: DASHBOARD ("Perfil del guardián") - Fiel a Mockup 3   */}
             {/* ================================================================= */}
             {screen === 'dashboard' && user && (
-              <div className="flex flex-col flex-1 justify-between bg-[#151030]">
-                <div className="flex-1 flex flex-col">
+              <div className="flex flex-col flex-1 min-h-0 overflow-hidden justify-between bg-[#151030]">
+                <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col">
                   {/* Cabecera Ilustrada con botones de Ayuda Autoexplicativa y Guía Docente */}
                   <div className="w-full relative shrink-0">
                     <img
@@ -1444,8 +1497,8 @@
             {/* PANTALLA 4: SELECTOR DE NIVELES ("Mapa del archivo") - Mockup 4   */}
             {/* ================================================================= */}
             {screen === 'map' && user && (
-              <div className="flex flex-col flex-1 justify-between bg-[#151030]">
-                <div className="overflow-y-auto no-scrollbar flex-1 pb-3">
+              <div className="flex flex-col flex-1 min-h-0 overflow-hidden justify-between bg-[#151030]">
+                <div className="overflow-y-auto no-scrollbar flex-1 min-h-0 pb-3">
                   {/* Banner Ilustrado Superior */}
                   <div className="w-full relative shrink-0">
                     <img
@@ -1621,8 +1674,8 @@
             {/* PESTAÑA: MISIONES Y MONITOREO DE AUTORREGULACIÓN (Criterio 4)     */}
             {/* ================================================================= */}
             {screen === 'missions' && user && (
-              <div className="flex flex-col flex-1 justify-between bg-[#151030]">
-                <div className="p-4 overflow-y-auto no-scrollbar">
+              <div className="flex flex-col flex-1 min-h-0 overflow-hidden justify-between bg-[#151030]">
+                <div className="p-4 flex-1 min-h-0 overflow-y-auto no-scrollbar">
                   <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-0.5">
                     Bitácora y Autoevaluación
                   </h1>
@@ -1707,8 +1760,8 @@
             {/* PESTAÑA: MOCHILA (Artefactos y Pistas del Archivo)                */}
             {/* ================================================================= */}
             {screen === 'backpack' && user && (
-              <div className="flex flex-col flex-1 justify-between bg-[#151030]">
-                <div className="p-4 overflow-y-auto no-scrollbar">
+              <div className="flex flex-col flex-1 min-h-0 overflow-hidden justify-between bg-[#151030]">
+                <div className="p-4 flex-1 min-h-0 overflow-y-auto no-scrollbar">
                   <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-1">
                     Mochila del Guardián
                   </h1>
@@ -1763,8 +1816,8 @@
             {/* PESTAÑA: PERFIL, CRÉDITOS Y DISEÑO INSTRUCCIONAL                  */}
             {/* ================================================================= */}
             {screen === 'profile' && user && (
-              <div className="flex flex-col flex-1 justify-between bg-[#151030]">
-                <div className="p-4 overflow-y-auto no-scrollbar text-left">
+              <div className="flex flex-col flex-1 min-h-0 overflow-hidden justify-between bg-[#151030]">
+                <div className="p-4 flex-1 min-h-0 overflow-y-auto no-scrollbar text-left">
                   <h1 className="font-magic text-2xl font-extrabold text-[#F8C146] text-center mb-2">
                     Credencial del Guardián
                   </h1>
@@ -1807,6 +1860,31 @@
                     <div className="flex justify-between">
                       <span className="text-gray-300">Rango alcanzado:</span>
                       <span className="font-extrabold text-[#2CE5D8]">{currentRank}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#221A4B] border border-[#52438C] rounded-2xl p-3 mb-3 flex items-center justify-between">
+                    <div>
+                      <span className="text-xs font-extrabold text-[#F8C146] block">🔠 Tamaño de letra</span>
+                      <span className="text-[11px] text-gray-300">Actual: {FONT_SCALE_LABELS[fontSizeLevel]}</span>
+                    </div>
+                    <div className="no-text-scale flex items-center gap-1.5">
+                      <button
+                        onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
+                        disabled={fontSizeLevel === 0}
+                        className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 0 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
+                        title="Reducir letra"
+                      >
+                        A-
+                      </button>
+                      <button
+                        onClick={() => setFontSizeLevel((prev) => Math.min(3, prev + 1))}
+                        disabled={fontSizeLevel === 3}
+                        className={`bg-[#151030] text-white border border-white/25 px-3 py-1 rounded-xl text-xs font-black ${fontSizeLevel === 3 ? 'opacity-40' : 'hover:bg-[#2E2460]'}`}
+                        title="Aumentar letra"
+                      >
+                        A+
+                      </button>
                     </div>
                   </div>
 
@@ -1981,15 +2059,33 @@
                   </span>
                   <h2 className="text-lg font-black text-[#F8C146] leading-tight">{activeWorld.title}</h2>
                 </div>
-                <button
-                  onClick={() => {
-                    stopSpeech();
-                    setActiveWorld(null);
-                  }}
-                  className="bg-[#261E52] hover:bg-[#34296E] text-gray-200 px-3 py-1 rounded-full text-xs font-bold border border-white/15"
-                >
-                  ✕ Mapa
-                </button>
+                <div className="no-text-scale flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
+                    disabled={fontSizeLevel === 0}
+                    className={`bg-[#261E52] text-white px-2 py-1 rounded-full text-[11px] font-black border border-white/15 ${fontSizeLevel === 0 ? 'opacity-40' : 'hover:bg-[#34296E]'}`}
+                    title="Reducir letra"
+                  >
+                    A-
+                  </button>
+                  <button
+                    onClick={() => setFontSizeLevel((prev) => Math.min(3, prev + 1))}
+                    disabled={fontSizeLevel === 3}
+                    className={`bg-[#261E52] text-white px-2 py-1 rounded-full text-[11px] font-black border border-white/15 ${fontSizeLevel === 3 ? 'opacity-40' : 'hover:bg-[#34296E]'}`}
+                    title="Aumentar letra"
+                  >
+                    A+
+                  </button>
+                  <button
+                    onClick={() => {
+                      stopSpeech();
+                      setActiveWorld(null);
+                    }}
+                    className="bg-[#261E52] hover:bg-[#34296E] text-gray-200 px-3 py-1 rounded-full text-xs font-bold border border-white/15"
+                  >
+                    ✕ Mapa
+                  </button>
+                </div>
               </div>
 
               {/* Indicador visual de las 4 Fases de la Secuencia Didáctica */}
@@ -2053,17 +2149,19 @@
                         {isSpeaking ? '⏹ Detener voz' : '🔊 Escuchar lectura'}
                       </button>
 
-                      <div className="flex items-center gap-1">
+                      <div className="no-text-scale flex items-center gap-1">
                         <button
                           onClick={() => setFontSizeLevel((prev) => Math.max(0, prev - 1))}
-                          className="bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black"
+                          disabled={fontSizeLevel === 0}
+                          className={`bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black ${fontSizeLevel === 0 ? 'opacity-40' : ''}`}
                           title="Reducir letra"
                         >
                           A-
                         </button>
                         <button
-                          onClick={() => setFontSizeLevel((prev) => Math.min(2, prev + 1))}
-                          className="bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black"
+                          onClick={() => setFontSizeLevel((prev) => Math.min(3, prev + 1))}
+                          disabled={fontSizeLevel === 3}
+                          className={`bg-[#151030] text-white border border-white/20 px-2 py-0.5 rounded-lg text-[11px] font-black ${fontSizeLevel === 3 ? 'opacity-40' : ''}`}
                           title="Aumentar letra"
                         >
                           A+
