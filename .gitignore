@@ -3,3 +3,6 @@ android/
 dist/
 .DS_Store
 *.log
+*.jks
+*.keystore
+keystore.properties
